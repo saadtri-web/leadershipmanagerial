@@ -2410,18 +2410,24 @@
         return remoteResources.some((resource) => resource.content_text && resource.content_text.trim().length > 80);
       }
 
-      function buildAiContext(question) {
-        const relevantModules = findRelevantModules(question);
+      function buildAiContext(question, focusedResourceId = null) {
+        const focusedResource = focusedResourceId
+          ? remoteResources.find((resource) => resource.id === focusedResourceId)
+          : null;
+        const focusedModule = focusedResource ? getModuleById(focusedResource.module_id) : null;
+        const relevantModules = focusedModule ? [focusedModule] : findRelevantModules(question);
         const modules = relevantModules.length ? relevantModules : getAllModules().slice(0, 3);
         let remainingChars = 65000;
 
         return modules.map((module) => {
           const resources = getRemoteResources(module.id)
+            .filter((resource) => !focusedResourceId || resource.id === focusedResourceId)
             .filter((resource) => resource.content_text)
             .map((resource) => {
               const text = resource.content_text.slice(0, Math.max(0, Math.min(remainingChars, 18000)));
               remainingChars -= text.length;
               return {
+                id: resource.id,
                 title: resource.title,
                 fileName: resource.file_name,
                 text,
@@ -2451,9 +2457,16 @@
         return "chat";
       }
 
-      async function callDocumentAi(question) {
-        if (!hasExtractedPdfText()) {
-          throw new Error("Aucun texte PDF analysé n’est encore disponible.");
+      async function callDocumentAi(question, focusedResourceId = null) {
+        const modules = buildAiContext(question, focusedResourceId);
+        const hasText = modules.some((module) => module.resources && module.resources.length);
+
+        if (!hasText) {
+          throw new Error(
+            focusedResourceId
+              ? "Ce fichier n’a pas encore de texte extrait. Réuploadez le PDF avec la dernière version du site."
+              : "Aucun texte PDF analysé n’est encore disponible."
+          );
         }
 
         const response = await fetch("/.netlify/functions/ai-assistant", {
@@ -2462,7 +2475,7 @@
           body: JSON.stringify({
             task: inferAiTask(question),
             question,
-            modules: buildAiContext(question),
+            modules,
           }),
         });
 
@@ -2573,7 +2586,7 @@
         return "\n\nNote : pour générer à partir des vrais PDF, les cours doivent être uploadés avec la nouvelle version du site afin que leur texte soit extrait.";
       }
 
-      async function addAiExchange(question) {
+      async function addAiExchange(question, focusedResourceId = null) {
         const relevantModules = findRelevantModules(question);
         aiMessages = [
           ...aiMessages,
@@ -2583,7 +2596,7 @@
         render();
 
         try {
-          const response = await callDocumentAi(question);
+          const response = await callDocumentAi(question, focusedResourceId);
           aiMessages = aiMessages.map((message, index) =>
             index === aiMessages.length - 1
               ? {
@@ -3978,7 +3991,7 @@
             navButtons.forEach((navButton) => {
               navButton.classList.toggle("active", navButton.dataset.view === "ai");
             });
-            await addAiExchange(buildResourceAiQuestion(resource, button.dataset.resourceAi));
+            await addAiExchange(buildResourceAiQuestion(resource, button.dataset.resourceAi), resource.id);
             render();
             const chat = document.querySelector("#aiChat");
             if (chat) chat.scrollTop = chat.scrollHeight;
