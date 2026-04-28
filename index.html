@@ -18,9 +18,11 @@
         --shadow: 0 16px 38px rgba(15, 23, 42, 0.09);
         --soft-shadow: 0 8px 24px rgba(15, 23, 42, 0.07);
       }
+
       * {
         box-sizing: border-box;
       }
+
       body {
         margin: 0;
         background: var(--page);
@@ -29,15 +31,18 @@
           Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
           sans-serif;
       }
+
       button,
       input,
       textarea,
       select {
         font: inherit;
       }
+
       button {
         cursor: pointer;
       }
+
       .hero {
         position: relative;
         overflow: hidden;
@@ -47,11 +52,13 @@
           radial-gradient(circle at 3% 95%, rgba(34, 211, 238, 0.22), transparent 27%),
           linear-gradient(135deg, #082f49 0%, #075985 58%, #0e7490 100%);
       }
+
       .hero-inner,
       .shell {
         width: min(1280px, calc(100% - 40px));
         margin: 0 auto;
       }
+
       .hero-inner {
         padding: 48px 0 42px;
         display: grid;
@@ -59,12 +66,14 @@
         gap: 40px;
         align-items: center;
       }
+
       .brand-row {
         display: flex;
         gap: 16px;
         align-items: center;
         margin-bottom: 26px;
       }
+
       .logo-card {
         width: 96px;
         min-width: 96px;
@@ -77,6 +86,7 @@
         box-shadow: 0 22px 45px rgba(8, 47, 73, 0.28);
         border: 1px solid rgba(255, 255, 255, 0.4);
       }
+
       .logo-mark {
         width: 72px;
         height: 72px;
@@ -88,3 +98,3420 @@
         line-height: 1;
         letter-spacing: 0;
       }
+
+      .pills {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        align-items: flex-start;
+      }
+
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        border: 1px solid rgba(255, 255, 255, 0.65);
+        background: rgba(255, 255, 255, 0.94);
+        color: #334155;
+        border-radius: 999px;
+        padding: 7px 12px;
+        font-size: 12px;
+        font-weight: 800;
+        box-shadow: 0 8px 20px rgba(8, 47, 73, 0.14);
+      }
+
+      h1,
+      h2,
+      h3,
+      p {
+        margin: 0;
+      }
+
+      .hero h1 {
+        max-width: 880px;
+        font-size: clamp(40px, 7vw, 70px);
+        line-height: 0.98;
+        font-weight: 950;
+        letter-spacing: 0;
+      }
+
+      .hero-copy {
+        max-width: 760px;
+        margin-top: 22px;
+        color: #e0f2fe;
+        font-size: 18px;
+        line-height: 1.65;
+      }
+
+      .hero-panel {
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        background: rgba(255, 255, 255, 0.12);
+        border-radius: 28px;
+        padding: 24px;
+        box-shadow: 0 26px 50px rgba(8, 47, 73, 0.28);
+        backdrop-filter: blur(14px);
+      }
+
+      .hero-panel-title {
+        display: flex;
+        gap: 14px;
+        align-items: center;
+      }
+
+      .hero-panel-title h2 {
+        font-size: 21px;
+      }
+
+      .hero-panel-title p {
+        margin-top: 3px;
+        color: #cffafe;
+        font-size: 14px;
+      }
+
+      .stat-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+        margin-top: 22px;
+      }
+
+      .stat {
+        border-radius: 18px;
+        padding: 16px;
+        background: rgba(255, 255, 255, 0.12);
+      }
+
+      .stat strong {
+        display: block;
+        font-size: 28px;
+        line-height: 1.1;
+        font-weight: 950;
+      }
+
+      .stat span {
+        color: #cffafe;
+        font-size: 13px;
+      }
+
+      .shell {
+        padding: 34px 0 52px;
+      }
+
+      .layout {
+        display: grid;
+        grid-template-columns: 280px minmax(0, 1fr);
+        gap: 24px;
+        align-items: start;
+      }
+
+      .sidebar {
+        display: grid;
+        gap: 16px;
+        position: sticky;
+        top: 18px;
+      }
+
+      .panel,
+      .module-card,
+      .detail-card {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        box-shadow: var(--soft-shadow);
+      }
+
+      .panel {
+        border-radius: 24px;
+        padding: 18px;
+      }
+
+      .section {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 26px;
+        padding: 24px;
+        box-shadow: var(--soft-shadow);
+      }
+
+      .section + .section,
+      .stack > * + * {
+        margin-top: 24px;
+      }
+
+      .eyebrow {
+        color: var(--sky);
+        font-size: 12px;
+        font-weight: 900;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        margin-bottom: 12px;
+      }
+
+      .nav-list,
+      .feature-list {
+        display: grid;
+        gap: 9px;
+      }
+
+      .nav-button {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        gap: 11px;
+        border: 0;
+        border-radius: 18px;
+        padding: 13px 14px;
+        background: #fff;
+        color: #334155;
+        text-align: left;
+        font-size: 14px;
+        font-weight: 800;
+        transition:
+          transform 160ms ease,
+          box-shadow 160ms ease,
+          background 160ms ease;
+      }
+
+      .nav-button:hover {
+        background: #f1f5f9;
+      }
+
+      .nav-button.active {
+        background: #0c4a6e;
+        color: white;
+        box-shadow: var(--shadow);
+      }
+
+      .icon {
+        width: 20px;
+        height: 20px;
+        flex: 0 0 auto;
+        stroke: currentColor;
+        stroke-width: 2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        fill: none;
+      }
+
+      .icon-box {
+        width: 46px;
+        height: 46px;
+        display: inline-grid;
+        place-items: center;
+        border-radius: 16px;
+        color: var(--sky);
+        background: #e0f2fe;
+      }
+
+      .search-wrap {
+        position: relative;
+      }
+
+      .search-wrap .icon {
+        position: absolute;
+        left: 13px;
+        top: 50%;
+        color: #94a3b8;
+        transform: translateY(-50%);
+      }
+
+      .search-input {
+        width: 100%;
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        background: #f8fafc;
+        padding: 13px 14px 13px 42px;
+        color: #0f172a;
+        outline: 0;
+      }
+
+      .search-input:focus {
+        border-color: #7dd3fc;
+        box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.14);
+      }
+
+      .feature-list div,
+      .soft-box {
+        border-radius: 18px;
+        background: #f8fafc;
+        padding: 13px;
+        color: #475569;
+        font-size: 14px;
+        line-height: 1.5;
+      }
+
+      .section h2 {
+        font-size: 25px;
+        line-height: 1.2;
+        font-weight: 900;
+      }
+
+      .section p {
+        margin-top: 10px;
+        color: #475569;
+        font-size: 15px;
+        line-height: 1.7;
+      }
+
+      .cards-4,
+      .cards-2,
+      .cards-3,
+      .modules-grid {
+        display: grid;
+        gap: 20px;
+      }
+
+      .cards-4 {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+
+      .cards-2,
+      .modules-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .cards-3 {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .module-card {
+        border-radius: 24px;
+        padding: 22px;
+        transition:
+          transform 160ms ease,
+          box-shadow 160ms ease;
+      }
+
+      .module-card:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow);
+      }
+
+      .card-top {
+        display: flex;
+        gap: 16px;
+        align-items: flex-start;
+        justify-content: space-between;
+      }
+
+      .module-card h3,
+      .admin-card h3,
+      .mini-card h3 {
+        color: #0f172a;
+        font-size: 19px;
+        line-height: 1.25;
+        font-weight: 900;
+      }
+
+      .semester-label {
+        margin-top: 5px;
+        color: var(--sky);
+        font-size: 14px;
+        font-weight: 800;
+      }
+
+      .module-card p,
+      .admin-card p,
+      .mini-card p {
+        margin-top: 14px;
+        color: #475569;
+        font-size: 14px;
+        line-height: 1.65;
+      }
+
+      .tag {
+        display: inline-flex;
+        align-items: center;
+        border-radius: 999px;
+        background: #e0f2fe;
+        color: var(--sky);
+        padding: 7px 11px;
+        font-size: 12px;
+        font-weight: 900;
+        white-space: nowrap;
+      }
+
+      .chips {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin-top: 16px;
+      }
+
+      .chip {
+        border-radius: 14px;
+        background: #f1f5f9;
+        color: #475569;
+        padding: 7px 11px;
+        font-size: 12px;
+        font-weight: 800;
+      }
+
+      .program-block {
+        display: grid;
+        grid-template-columns: 68px 1fr;
+        gap: 18px;
+        border-top: 1px solid var(--line);
+        padding-top: 24px;
+      }
+
+      .program-number {
+        display: grid;
+        place-items: center;
+        width: 54px;
+        height: 54px;
+        border-radius: 18px;
+        background: #0f172a;
+        color: #fff;
+        font-size: 20px;
+        font-weight: 950;
+      }
+
+      .course-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 14px;
+      }
+
+      .progress-track {
+        height: 9px;
+        overflow: hidden;
+        border-radius: 999px;
+        background: #e2e8f0;
+      }
+
+      .progress-fill {
+        height: 100%;
+        border-radius: inherit;
+        background: var(--emerald);
+      }
+
+      .lesson-row {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .lesson-row.done {
+        border-color: #bbf7d0;
+        background: #f0fdf4;
+      }
+
+      .link-button {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        border: 0;
+        padding: 0;
+        margin-top: 20px;
+        background: transparent;
+        color: var(--sky);
+        font-size: 14px;
+        font-weight: 900;
+      }
+
+      .link-button:hover {
+        color: var(--sky-dark);
+      }
+
+      .back-button,
+      .primary-button,
+      .dark-button,
+      .green-button {
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+        border: 0;
+        border-radius: 16px;
+        padding: 11px 15px;
+        font-size: 14px;
+        font-weight: 900;
+      }
+
+      .back-button {
+        color: #334155;
+        background: white;
+        border: 1px solid var(--line);
+        box-shadow: var(--soft-shadow);
+      }
+
+      .primary-button {
+        color: white;
+        background: var(--sky-dark);
+      }
+
+      .dark-button {
+        color: white;
+        background: #111827;
+      }
+
+      .green-button {
+        color: white;
+        background: var(--emerald);
+      }
+
+      .secondary-button {
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 11px 15px;
+        color: #334155;
+        background: #fff;
+        font-size: 14px;
+        font-weight: 900;
+      }
+
+      .danger-button {
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+        border: 1px solid #fecaca;
+        border-radius: 16px;
+        background: #fef2f2;
+        color: #b91c1c;
+        padding: 11px 15px;
+        font-size: 14px;
+        font-weight: 900;
+        cursor: pointer;
+      }
+
+      .field {
+        display: grid;
+        gap: 8px;
+      }
+
+      .field label {
+        color: #334155;
+        font-size: 13px;
+        font-weight: 900;
+      }
+
+      .field input,
+      .field textarea,
+      .field select {
+        width: 100%;
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        background: #fff;
+        padding: 12px 13px;
+        color: #0f172a;
+        outline: 0;
+      }
+
+      .field textarea {
+        min-height: 120px;
+        resize: vertical;
+      }
+
+      .field input:focus,
+      .field textarea:focus,
+      .field select:focus {
+        border-color: #7dd3fc;
+        box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.14);
+      }
+
+      .form-grid {
+        display: grid;
+        gap: 14px;
+      }
+
+      .auth-card {
+        border: 1px solid var(--line);
+        border-radius: 22px;
+        background: #f8fafc;
+        padding: 18px;
+      }
+
+      .notice {
+        border: 1px solid #bae6fd;
+        border-radius: 18px;
+        background: #f0f9ff;
+        color: #075985;
+        padding: 14px;
+        font-size: 14px;
+        line-height: 1.55;
+      }
+
+      .message {
+        display: none;
+        border-radius: 16px;
+        padding: 12px 14px;
+        font-size: 14px;
+        line-height: 1.5;
+      }
+
+      .message.show {
+        display: block;
+      }
+
+      .message.ok {
+        background: #ecfdf5;
+        color: #047857;
+        border: 1px solid #a7f3d0;
+      }
+
+      .message.error {
+        background: #fef2f2;
+        color: #b91c1c;
+        border: 1px solid #fecaca;
+      }
+
+      .resource-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 12px;
+        border-radius: 14px;
+        background: var(--sky-dark);
+        color: #fff;
+        padding: 9px 12px;
+        text-decoration: none;
+        font-size: 13px;
+        font-weight: 900;
+      }
+
+      .ai-chat {
+        display: grid;
+        gap: 14px;
+        max-height: 520px;
+        overflow: auto;
+        border: 1px solid var(--line);
+        border-radius: 22px;
+        background: #f8fafc;
+        padding: 16px;
+      }
+
+      .ai-message {
+        max-width: 88%;
+        border-radius: 18px;
+        padding: 13px 15px;
+        font-size: 14px;
+        line-height: 1.6;
+        white-space: pre-line;
+      }
+
+      .ai-message.assistant {
+        justify-self: start;
+        color: #334155;
+        background: #fff;
+        border: 1px solid var(--line);
+      }
+
+      .ai-message.user {
+        justify-self: end;
+        color: #fff;
+        background: var(--sky-dark);
+      }
+
+      .quick-prompts {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+
+      .ai-actions {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin-top: 12px;
+      }
+
+      .ai-action-button {
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: #fff;
+        color: var(--sky);
+        padding: 8px 11px;
+        font-size: 13px;
+        font-weight: 900;
+      }
+
+      .detail-hero {
+        display: flex;
+        gap: 24px;
+        align-items: flex-start;
+        justify-content: space-between;
+      }
+
+      .detail-hero h1 {
+        margin-top: 7px;
+        font-size: clamp(28px, 4vw, 42px);
+        line-height: 1.08;
+        font-weight: 950;
+      }
+
+      .detail-meta {
+        margin-top: 10px;
+        color: var(--muted);
+        font-size: 14px;
+        font-weight: 800;
+      }
+
+      .status-box {
+        min-width: 210px;
+        border-radius: 22px;
+        background: #f8fafc;
+        padding: 16px;
+        color: #475569;
+        font-size: 14px;
+        line-height: 1.8;
+      }
+
+      .status-box strong {
+        display: block;
+        color: #0f172a;
+        margin-bottom: 4px;
+      }
+
+      .list-stack {
+        display: grid;
+        gap: 12px;
+        margin-top: 18px;
+      }
+
+      .list-item {
+        border-radius: 18px;
+        background: #f8fafc;
+        padding: 15px;
+        color: #475569;
+        font-size: 14px;
+        line-height: 1.55;
+      }
+
+      .list-item.bordered {
+        background: white;
+        border: 1px solid var(--line);
+      }
+
+      .list-item strong {
+        color: #0f172a;
+      }
+
+      .forum-row {
+        display: flex;
+        gap: 16px;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .admin-head {
+        display: flex;
+        gap: 14px;
+        align-items: center;
+      }
+
+      .admin-card {
+        background: #fff;
+        border: 1px solid var(--line);
+        border-radius: 24px;
+        padding: 24px;
+        box-shadow: var(--soft-shadow);
+      }
+
+      .empty {
+        border: 1px dashed #cbd5e1;
+        border-radius: 22px;
+        padding: 28px;
+        text-align: center;
+        color: #64748b;
+        background: #fff;
+      }
+
+      @media (max-width: 1080px) {
+        .hero-inner,
+        .layout {
+          grid-template-columns: 1fr;
+        }
+
+        .hero-panel {
+          max-width: 560px;
+        }
+
+        .sidebar {
+          position: static;
+        }
+
+        .cards-4 {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+
+      @media (max-width: 760px) {
+        .hero-inner,
+        .shell {
+          width: min(100% - 28px, 1280px);
+        }
+
+        .hero-inner {
+          padding-top: 30px;
+        }
+
+        .brand-row,
+        .detail-hero,
+        .forum-row {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .logo-card {
+          width: 84px;
+          min-width: 84px;
+        }
+
+        .cards-4,
+        .cards-3,
+        .cards-2,
+        .modules-grid,
+        .stat-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .program-block {
+          grid-template-columns: 1fr;
+        }
+
+        .lesson-row {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+
+        .section,
+        .module-card,
+        .admin-card {
+          border-radius: 22px;
+          padding: 19px;
+        }
+
+        .status-box {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="hero">
+      <div class="hero-inner">
+        <div>
+          <div class="brand-row">
+            <div class="logo-card" aria-label="Logo FSJES Tétouan">
+              <div class="logo-mark">FSJES</div>
+            </div>
+            <div class="pills">
+              <span class="pill">Université Abdelmalek Essaâdi</span>
+              <span class="pill">Faculté des Sciences Juridiques, Économiques et Sociales de Tétouan</span>
+            </div>
+          </div>
+          <h1>Master Leadership Managérial (Temps Aménagé)</h1>
+          <p class="hero-copy">
+            Plateforme académique complète destinée à centraliser les cours, les mises à jour pédagogiques,
+            les exposés, les projets et les échanges entre étudiants et administration.
+          </p>
+        </div>
+
+        <aside class="hero-panel">
+          <div class="hero-panel-title">
+            <span class="icon-box" style="color:white;background:rgba(255,255,255,.16)" data-icon="layers"></span>
+            <div>
+              <h2>Plateforme complète</h2>
+              <p>Cours, mises à jour, exposés, projets et forum</p>
+            </div>
+          </div>
+          <div class="stat-grid">
+            <div class="stat"><strong>10</strong><span>Modules intégrés</span></div>
+            <div class="stat"><strong>4</strong><span>Espaces métiers</span></div>
+            <div class="stat"><strong>Admin</strong><span>Upload & update</span></div>
+            <div class="stat"><strong>Forum</strong><span>Échanges pédagogiques</span></div>
+          </div>
+        </aside>
+      </div>
+    </header>
+
+    <div class="shell">
+      <div class="layout">
+        <aside class="sidebar">
+          <section class="panel">
+            <div class="eyebrow">Navigation</div>
+            <div class="nav-list">
+              <button class="nav-button active" data-view="home"><span data-icon="home"></span><span>Accueil</span></button>
+              <button class="nav-button" data-view="modules"><span data-icon="library"></span><span>Cours</span></button>
+              <button class="nav-button" data-view="path"><span data-icon="layers"></span><span>Parcours</span></button>
+              <button class="nav-button" data-view="documents"><span data-icon="book"></span><span>Documents</span></button>
+              <button class="nav-button" data-view="request"><span data-icon="message"></span><span>Demander un cours</span></button>
+              <button class="nav-button" data-view="ai"><span data-icon="sparkles"></span><span>Assistant IA</span></button>
+              <button class="nav-button" data-view="admin"><span data-icon="settings"></span><span>Administration</span></button>
+            </div>
+          </section>
+
+          <section class="panel">
+            <div class="eyebrow">Recherche</div>
+            <div class="search-wrap">
+              <span data-icon="search"></span>
+              <input class="search-input" id="searchInput" type="search" placeholder="Rechercher un module" />
+            </div>
+          </section>
+
+          <section class="panel">
+            <div class="eyebrow">Fonctionnalités</div>
+            <div class="feature-list">
+              <div>Téléversement des cours</div>
+              <div>Mise à jour des supports</div>
+              <div>Gestion des exposés</div>
+              <div>Gestion des projets</div>
+              <div>Parcours et progression</div>
+              <div>Documents centralisés</div>
+              <div>Demande de nouveaux cours</div>
+              <div>Forum de discussion</div>
+            </div>
+          </section>
+        </aside>
+
+        <main id="app"></main>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+      const semestres = [
+        {
+          id: "s7",
+          titre: "Semestre 7",
+          statut: "Actif",
+          modules: [
+            {
+              id: "leadership-ia",
+              titre: "Leadership assisté par IA",
+              semestre: "Semestre 7",
+              resume:
+                "Approches du leadership augmentées par les outils d’intelligence artificielle, aide à la décision, innovation et pratiques managériales contemporaines.",
+              objectifs: [
+                "Comprendre les apports de l’IA dans le pilotage managérial",
+                "Identifier les outils d’aide à la décision",
+                "Analyser les enjeux éthiques et organisationnels",
+              ],
+              chapitres: [
+                "Fondements du leadership intelligent",
+                "Outils IA pour l’aide à la décision",
+                "Transformation des pratiques managériales",
+              ],
+              ressources: [
+                { nom: "Cours principal", type: "PDF", statut: "Publié" },
+                { nom: "Résumé synthétique", type: "Fiche", statut: "Publié" },
+                { nom: "Capsule d’explication", type: "Vidéo", statut: "À ajouter" },
+              ],
+              exposes: ["Impact de l’IA sur le rôle du manager", "Leadership humain vs leadership augmenté"],
+              projets: ["Concevoir un mini tableau de bord d’aide à la décision"],
+              forum: [
+                { auteur: "Administration", sujet: "Questions sur le chapitre 1", reponses: 8 },
+                { auteur: "Étudiants", sujet: "Exemples d’outils IA à présenter", reponses: 5 },
+              ],
+            },
+            {
+              id: "anglais",
+              titre: "Langue étrangère II : Anglais",
+              semestre: "Semestre 7",
+              resume:
+                "Développement de l’anglais académique et professionnel appliqué aux champs du management, de l’organisation et de la communication.",
+              objectifs: [
+                "Renforcer la compréhension de textes académiques",
+                "Améliorer l’expression écrite et orale",
+                "Maîtriser le vocabulaire du business et du leadership",
+              ],
+              chapitres: ["Academic English", "Business Vocabulary", "Presentation Skills"],
+              ressources: [
+                { nom: "Support de cours", type: "PDF", statut: "Publié" },
+                { nom: "Liste de vocabulaire", type: "Document", statut: "Publié" },
+              ],
+              exposes: ["Presenting a leadership case in English"],
+              projets: ["Mini portfolio of academic and business writing"],
+              forum: [{ auteur: "Étudiants", sujet: "Questions de vocabulaire", reponses: 6 }],
+            },
+            {
+              id: "management-organisations",
+              titre: "Management des organisations",
+              semestre: "Semestre 7",
+              resume:
+                "Fondements du management, structures organisationnelles, coordination, pilotage de la performance et dynamique des organisations.",
+              objectifs: [
+                "Analyser les structures organisationnelles",
+                "Comprendre les fonctions du management",
+                "Évaluer les mécanismes de coordination",
+              ],
+              chapitres: ["Écoles du management", "Structures et processus organisationnels", "Pilotage et performance"],
+              ressources: [
+                { nom: "Cours introductif", type: "PDF", statut: "Publié" },
+                { nom: "Étude de cas", type: "Document", statut: "Publié" },
+              ],
+              exposes: ["Taylorisme et management moderne", "Leadership et structure organisationnelle"],
+              projets: ["Diagnostic organisationnel d’une institution"],
+              forum: [{ auteur: "Administration", sujet: "Références bibliographiques", reponses: 3 }],
+            },
+            {
+              id: "mq-bi",
+              titre: "Méthodes quantitatives et Business Intelligence appliquée",
+              semestre: "Semestre 7",
+              resume:
+                "Méthodes quantitatives, indicateurs, tableaux de bord et exploitation décisionnelle des données dans un cadre managérial.",
+              objectifs: ["Manipuler des indicateurs", "Construire une logique de BI", "Interpréter des données décisionnelles"],
+              chapitres: ["Statistiques descriptives", "Indicateurs", "Tableaux de bord"],
+              ressources: [
+                { nom: "Cours magistral", type: "PDF", statut: "Publié" },
+                { nom: "TD d’application", type: "Feuille", statut: "À mettre à jour" },
+              ],
+              exposes: ["Power BI et pilotage de performance"],
+              projets: ["Création d’un tableau de bord décisionnel"],
+              forum: [{ auteur: "Étudiants", sujet: "Compréhension des indicateurs KPI", reponses: 10 }],
+            },
+            {
+              id: "ia-concepts",
+              titre: "Intelligence Artificielle – Concepts et Applications",
+              semestre: "Semestre 7",
+              resume:
+                "Concepts de base de l’intelligence artificielle, principaux usages, logique algorithmique et applications dans les organisations.",
+              objectifs: ["Assimiler les concepts de base", "Distinguer IA, ML et DL", "Identifier les usages métier"],
+              chapitres: ["Introduction à l’IA", "Machine Learning", "Applications organisationnelles"],
+              ressources: [
+                { nom: "Cours de base", type: "PDF", statut: "Publié" },
+                { nom: "Fiche explicative", type: "Fiche", statut: "Publié" },
+              ],
+              exposes: ["IA générative et management", "Applications de l’IA dans le business"],
+              projets: ["Étude comparative d’outils IA"],
+              forum: [{ auteur: "Administration", sujet: "Questions générales sur IA/ML/DL", reponses: 12 }],
+            },
+            {
+              id: "stats-appliquees",
+              titre: "Statistiques appliquées",
+              semestre: "Semestre 7",
+              resume:
+                "Outils statistiques nécessaires à l’analyse des données, à l’interprétation des résultats et à la prise de décision.",
+              objectifs: ["Comprendre les indicateurs statistiques", "Résoudre des exercices", "Interpréter les résultats"],
+              chapitres: ["Statistiques descriptives", "Probabilités", "Interprétation décisionnelle"],
+              ressources: [
+                { nom: "Cours complet", type: "PDF", statut: "Publié" },
+                { nom: "Série d’exercices", type: "TD", statut: "Publié" },
+              ],
+              exposes: ["Rôle des statistiques dans le management"],
+              projets: ["Mini analyse de données sur un cas concret"],
+              forum: [{ auteur: "Étudiants", sujet: "Correction des exercices", reponses: 14 }],
+            },
+          ],
+        },
+        {
+          id: "s8",
+          titre: "Semestre 8",
+          statut: "Actif",
+          modules: [
+            {
+              id: "leadership-equipe",
+              titre: "Leadership et gestion d’équipe",
+              semestre: "Semestre 8",
+              resume:
+                "Leadership opérationnel, mobilisation des équipes, gestion des conflits, motivation et accompagnement du changement.",
+              objectifs: ["Piloter une équipe", "Gérer les conflits", "Motiver et accompagner"],
+              chapitres: ["Styles de leadership", "Cohésion d’équipe", "Gestion des conflits"],
+              ressources: [{ nom: "Cours principal", type: "PDF", statut: "Publié" }],
+              exposes: ["Style de leadership dans les organisations"],
+              projets: ["Plan d’amélioration de la cohésion d’équipe"],
+              forum: [{ auteur: "Étudiants", sujet: "Exemples de conflits organisationnels", reponses: 7 }],
+            },
+            {
+              id: "techniques-communication",
+              titre: "Techniques de Communication",
+              semestre: "Semestre 8",
+              resume:
+                "Communication interpersonnelle, organisationnelle et professionnelle, avec mise en valeur des techniques et outils de transmission efficace.",
+              objectifs: ["Maîtriser les outils de communication", "Améliorer l’expression professionnelle", "Structurer un message"],
+              chapitres: ["Communication interpersonnelle", "Communication interne", "Supports de communication"],
+              ressources: [{ nom: "Support de cours", type: "PDF", statut: "Publié" }],
+              exposes: ["Communication interne dans une entreprise"],
+              projets: ["Élaboration d’un plan de communication"],
+              forum: [{ auteur: "Administration", sujet: "Consignes des exposés", reponses: 4 }],
+            },
+            {
+              id: "culture-entrepreneuriale",
+              titre: "Culture Entrepreneuriale",
+              semestre: "Semestre 8",
+              resume:
+                "Esprit d’initiative, innovation, création de valeur, opportunités et posture entrepreneuriale dans un environnement évolutif.",
+              objectifs: ["Développer l’esprit entrepreneurial", "Identifier des opportunités", "Formaliser une idée de projet"],
+              chapitres: ["Entrepreneuriat", "Innovation", "Modèle économique"],
+              ressources: [{ nom: "Cours du module", type: "PDF", statut: "Publié" }],
+              exposes: ["Profil de l’entrepreneur moderne"],
+              projets: ["Business idea canvas"],
+              forum: [{ auteur: "Étudiants", sujet: "Idées de projets entrepreneuriaux", reponses: 9 }],
+            },
+            {
+              id: "decision-eco-ia",
+              titre: "Décision Économique et Intelligence Artificielle",
+              semestre: "Semestre 8",
+              resume:
+                "Articulation entre raisonnement économique, analyse décisionnelle et apports de l’intelligence artificielle à la performance.",
+              objectifs: ["Analyser une décision économique", "Mobiliser des outils intelligents", "Relier IA et performance"],
+              chapitres: ["Décision économique", "Analyse prédictive", "IA et performance"],
+              ressources: [{ nom: "Cours principal", type: "PDF", statut: "Publié" }],
+              exposes: ["Décision économique dans un environnement data-driven"],
+              projets: ["Étude d’un cas décisionnel assisté par données"],
+              forum: [{ auteur: "Administration", sujet: "Documentation complémentaire", reponses: 2 }],
+            },
+          ],
+        },
+        { id: "s9", titre: "Semestre 9", statut: "À venir", modules: [] },
+        { id: "s10", titre: "Semestre 10", statut: "À venir", modules: [] },
+      ];
+
+      const adminPanels = [
+        {
+          titre: "Gestion des cours",
+          description: "Téléverser des PDF, fiches, vidéos et supports pédagogiques, puis mettre à jour les contenus publiés.",
+          icon: "upload",
+        },
+        {
+          titre: "Gestion des exposés",
+          description: "Créer les sujets d’exposés, fixer les consignes, déposer les supports et suivre les présentations.",
+          icon: "presentation",
+        },
+        {
+          titre: "Gestion des projets",
+          description: "Ouvrir des espaces projet, publier les cahiers des charges, suivre les livrables et archiver les rendus.",
+          icon: "briefcase",
+        },
+        {
+          titre: "Forum de discussion",
+          description: "Animer les échanges, publier des annonces, répondre aux questions et modérer les discussions pédagogiques.",
+          icon: "message",
+        },
+      ];
+
+      const SUPABASE_URL = "https://byecebcklptszzsqgykk.supabase.co";
+      const SUPABASE_KEY = "sb_publishable_DVKwCSC15M_XU7HLumGm7Q_Tja6aehO";
+      const SUPABASE_PROJECT_REF = "byecebcklptszzsqgykk";
+      const AUTH_STORAGE_KEY = `sb-${SUPABASE_PROJECT_REF}-auth-token`;
+      const STORAGE_BUCKET = "course-pdfs";
+      const SUBMISSIONS_BUCKET = "student-submissions";
+      const COURSE_ACCEPTED_TYPES = [
+        "application/pdf",
+        "application/msword",
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        "application/vnd.ms-powerpoint",
+        "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+        "application/vnd.ms-excel",
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        "text/csv",
+        "audio/mpeg",
+        "audio/mp3",
+        "audio/mp4",
+        "audio/wav",
+        "video/mp4",
+        "video/quicktime",
+        "video/webm",
+      ];
+      const COURSE_ACCEPT_ATTRIBUTE = [
+        ".pdf",
+        ".doc",
+        ".docx",
+        ".ppt",
+        ".pptx",
+        ".xls",
+        ".xlsx",
+        ".csv",
+        ".mp3",
+        ".m4a",
+        ".wav",
+        ".mp4",
+        ".mov",
+        ".webm",
+        ...COURSE_ACCEPTED_TYPES,
+      ].join(",");
+
+      const icons = {
+        home: '<svg class="icon" viewBox="0 0 24 24"><path d="m3 10 9-7 9 7"></path><path d="M5 10v10h14V10"></path><path d="M9 20v-6h6v6"></path></svg>',
+        library: '<svg class="icon" viewBox="0 0 24 24"><path d="m16 6 4 14"></path><path d="M12 6v14"></path><path d="M8 8v12"></path><path d="M4 4v16"></path></svg>',
+        settings: '<svg class="icon" viewBox="0 0 24 24"><path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z"></path><path d="M19.4 15a1.8 1.8 0 0 0 .36 1.98l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.8 1.8 0 0 0-1.98-.36 1.8 1.8 0 0 0-1.1 1.66V21a2 2 0 1 1-4 0v-.09A1.8 1.8 0 0 0 8.76 19.25a1.8 1.8 0 0 0-1.98.36l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.8 1.8 0 0 0 4.31 15a1.8 1.8 0 0 0-1.66-1.1H2.5a2 2 0 1 1 0-4h.15a1.8 1.8 0 0 0 1.66-1.1 1.8 1.8 0 0 0-.36-1.98l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.8 1.8 0 0 0 1.98.36h.01A1.8 1.8 0 0 0 9.85 2.7V2.5a2 2 0 1 1 4 0v.2a1.8 1.8 0 0 0 1.1 1.66 1.8 1.8 0 0 0 1.98-.36l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.8 1.8 0 0 0-.36 1.98 1.8 1.8 0 0 0 1.66 1.1h.44a2 2 0 1 1 0 4h-.44A1.8 1.8 0 0 0 19.4 15Z"></path></svg>',
+        search: '<svg class="icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"></circle><path d="m21 21-4.3-4.3"></path></svg>',
+        sparkles: '<svg class="icon" viewBox="0 0 24 24"><path d="m12 3-1.9 5.8L4 10.5l6.1 1.7L12 18l1.9-5.8 6.1-1.7-6.1-1.7L12 3Z"></path><path d="M5 3v4"></path><path d="M3 5h4"></path><path d="M19 17v4"></path><path d="M17 19h4"></path></svg>',
+        layers: '<svg class="icon" viewBox="0 0 24 24"><path d="m12 2 9 5-9 5-9-5 9-5Z"></path><path d="m3 12 9 5 9-5"></path><path d="m3 17 9 5 9-5"></path></svg>',
+        book: '<svg class="icon" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15Z"></path></svg>',
+        upload: '<svg class="icon" viewBox="0 0 24 24"><path d="M12 16V4"></path><path d="m7 9 5-5 5 5"></path><path d="M20 16v4H4v-4"></path></svg>',
+        presentation: '<svg class="icon" viewBox="0 0 24 24"><path d="M2 3h20"></path><path d="M21 3v12H3V3"></path><path d="m7 21 5-6 5 6"></path></svg>',
+        users: '<svg class="icon" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>',
+        message: '<svg class="icon" viewBox="0 0 24 24"><path d="M21 15a4 4 0 0 1-4 4H7l-4 4V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4v8Z"></path></svg>',
+        briefcase: '<svg class="icon" viewBox="0 0 24 24"><path d="M10 6V5a2 2 0 0 1 2-2h0a2 2 0 0 1 2 2v1"></path><rect x="3" y="6" width="18" height="14" rx="2"></rect><path d="M3 12h18"></path></svg>',
+        check: '<svg class="icon" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"></path></svg>',
+        chevronRight: '<svg class="icon" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"></path></svg>',
+        chevronLeft: '<svg class="icon" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"></path></svg>',
+      };
+
+      const app = document.querySelector("#app");
+      const searchInput = document.querySelector("#searchInput");
+      const navButtons = Array.from(document.querySelectorAll(".nav-button"));
+      const baseModules = semestres.flatMap((semestre) => semestre.modules);
+      if (window.pdfjsLib) {
+        window.pdfjsLib.GlobalWorkerOptions.workerSrc =
+          "https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.worker.min.js";
+      }
+      const supabaseClient =
+        window.supabase && SUPABASE_URL && SUPABASE_KEY
+          ? window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, {
+              auth: {
+                storageKey: AUTH_STORAGE_KEY,
+              },
+            })
+          : null;
+      let activeView = "home";
+      let selectedModuleId = null;
+      let recherche = "";
+      let currentUser = null;
+      let customModules = [];
+      let remoteResources = [];
+      let remoteForumTopics = [];
+      let remoteAnnouncements = [];
+      let remoteSubmissions = [];
+      let remoteCourseRequests = [];
+      let adminMessage = null;
+      let moduleMessage = null;
+      let courseRequestMessage = null;
+      let activeModuleAction = null;
+      let aiMessages = [
+        {
+          role: "assistant",
+          text:
+            "Bonjour. Je suis l’assistant IA du Master Leadership Managérial. Posez une question sur les modules, les cours, les exposés, les projets, le forum ou l’administration.",
+        },
+      ];
+
+      function icon(name) {
+        return icons[name] || "";
+      }
+
+      function escapeHtml(value) {
+        return String(value)
+          .replaceAll("&", "&amp;")
+          .replaceAll("<", "&lt;")
+          .replaceAll(">", "&gt;")
+          .replaceAll('"', "&quot;")
+          .replaceAll("'", "&#039;");
+      }
+
+      function getAllModules() {
+        return [...baseModules, ...customModules];
+      }
+
+      function toList(value) {
+        return String(value || "")
+          .split("\n")
+          .map((item) => item.trim())
+          .filter(Boolean);
+      }
+
+      function getRemoteResources(moduleId) {
+        return remoteResources.filter((resource) => resource.module_id === moduleId);
+      }
+
+      function getResourceUrl(resource) {
+        if (resource.file_url) return resource.file_url;
+        if (resource.file_path && supabaseClient) {
+          const { data } = supabaseClient.storage.from(STORAGE_BUCKET).getPublicUrl(resource.file_path);
+          return data.publicUrl;
+        }
+        return "#";
+      }
+
+      function getSubmissionUrl(submission) {
+        if (submission.file_url) return submission.file_url;
+        if (submission.file_path && supabaseClient) {
+          const { data } = supabaseClient.storage.from(SUBMISSIONS_BUCKET).getPublicUrl(submission.file_path);
+          return data.publicUrl;
+        }
+        return "#";
+      }
+
+      function getRemoteForumTopics(moduleId) {
+        return remoteForumTopics.filter((topic) => topic.module_id === moduleId);
+      }
+
+      function getModuleOptions() {
+        return getAllModules()
+          .map((module) => `<option value="${escapeHtml(module.id)}">${escapeHtml(module.semestre)} - ${escapeHtml(module.titre)}</option>`)
+          .join("");
+      }
+
+      function getLessonKey(moduleId, index) {
+        return `${moduleId}:${index}`;
+      }
+
+      function getCompletedLessons() {
+        try {
+          return JSON.parse(window.localStorage.getItem("leadership-completed-lessons") || "[]");
+        } catch (_error) {
+          return [];
+        }
+      }
+
+      function saveCompletedLessons(items) {
+        try {
+          window.localStorage.setItem("leadership-completed-lessons", JSON.stringify(items));
+        } catch (_error) {
+          // La progression reste optionnelle si le navigateur bloque le stockage local.
+        }
+      }
+
+      function isLessonDone(moduleId, index) {
+        return getCompletedLessons().includes(getLessonKey(moduleId, index));
+      }
+
+      function toggleLessonCompletion(moduleId, index) {
+        const key = getLessonKey(moduleId, index);
+        const completed = getCompletedLessons();
+        const next = completed.includes(key) ? completed.filter((item) => item !== key) : [...completed, key];
+        saveCompletedLessons(next);
+        render();
+      }
+
+      function getModuleLessonCount(module) {
+        return getModuleLessonTitles(module).length;
+      }
+
+      function getModuleLessonTitles(module) {
+        return module.chapitres.length ? module.chapitres : ["Présentation générale du module"];
+      }
+
+      function getModuleDuration(module) {
+        const minutes = getModuleLessonCount(module) * 35;
+        const hours = Math.floor(minutes / 60);
+        const remaining = minutes % 60;
+        if (!hours) return `${minutes} min`;
+        return remaining ? `${hours}h ${remaining}m` : `${hours}h`;
+      }
+
+      function getModuleProgress(module) {
+        const count = getModuleLessonCount(module);
+        const done = Array.from({ length: count }, (_item, index) => index).filter((index) =>
+          isLessonDone(module.id, index)
+        ).length;
+        return {
+          done,
+          count,
+          percent: Math.round((done / count) * 100),
+        };
+      }
+
+      function renderProgressBar(progress) {
+        return `
+          <div class="progress-track" aria-label="Progression ${progress.percent}%">
+            <div class="progress-fill" style="width:${progress.percent}%"></div>
+          </div>
+        `;
+      }
+
+      function getModuleStatus(module) {
+        return module.chapitres.length || getRemoteResources(module.id).length ? "Disponible" : "Bientôt disponible";
+      }
+
+      function getAllStaticDocuments() {
+        return getAllModules().flatMap((module) =>
+          module.ressources.map((resource) => ({
+            id: `${module.id}-${resource.nom}`,
+            title: resource.nom,
+            module,
+            kind: resource.type,
+            status: resource.statut,
+            static: true,
+          }))
+        );
+      }
+
+      function isSupabaseLockMessage(text) {
+        return String(text).includes("lock:") && String(text).includes("stole it");
+      }
+
+      function setAdminMessage(text, type = "ok") {
+        if (type === "error" && isSupabaseLockMessage(text)) {
+          if (currentUser) {
+            adminMessage = null;
+            render();
+            return;
+          }
+          adminMessage = {
+            text: "Session déjà en cours. Rechargez la page si nécessaire.",
+            type: "ok",
+          };
+          render();
+          return;
+        }
+
+        adminMessage = { text, type };
+        render();
+      }
+
+      function setAdminMessageWithoutRender(text, type = "ok") {
+        adminMessage = { text, type };
+        const message = app.querySelector(".message");
+        if (message) {
+          message.className = `message show ${type}`;
+          message.textContent = text;
+        }
+      }
+
+      function withTimeout(promise, milliseconds, message) {
+        return Promise.race([
+          promise,
+          new Promise((_, reject) => {
+            window.setTimeout(() => reject(new Error(message)), milliseconds);
+          }),
+        ]);
+      }
+
+      function clearLocalAuthSession() {
+        [window.localStorage, window.sessionStorage].forEach((storage) => {
+          if (!storage) return;
+          Object.keys(storage)
+            .filter((key) => key === AUTH_STORAGE_KEY || key.includes(SUPABASE_PROJECT_REF))
+            .forEach((key) => storage.removeItem(key));
+        });
+      }
+
+      function setModuleMessage(text, type = "ok") {
+        moduleMessage = { text, type };
+        render();
+      }
+
+      function cleanFileName(fileName) {
+        return fileName
+          .normalize("NFD")
+          .replace(/[\u0300-\u036f]/g, "")
+          .replace(/[^a-zA-Z0-9._-]+/g, "-")
+          .replace(/-+/g, "-")
+          .replace(/^-|-$/g, "")
+          .toLowerCase();
+      }
+
+      function getFileExtension(fileName) {
+        return String(fileName).split(".").pop().toLowerCase();
+      }
+
+      function isAcceptedCourseFile(file) {
+        const extension = getFileExtension(file.name);
+        return (
+          COURSE_ACCEPTED_TYPES.includes(file.type) ||
+          ["pdf", "doc", "docx", "ppt", "pptx", "xls", "xlsx", "csv", "mp3", "m4a", "wav", "mp4", "mov", "webm"].includes(extension)
+        );
+      }
+
+      function getResourceKind(resource) {
+        const mime = resource.mime_type || "";
+        const extension = getFileExtension(resource.file_name || "");
+
+        if (mime.startsWith("video/") || ["mp4", "mov", "webm"].includes(extension)) return "Vidéo";
+        if (mime.startsWith("audio/") || ["mp3", "m4a", "wav"].includes(extension)) return "Audio";
+        if (["doc", "docx"].includes(extension)) return "Word";
+        if (["ppt", "pptx"].includes(extension)) return "PowerPoint";
+        if (["xls", "xlsx", "csv"].includes(extension)) return "Excel";
+        if (extension === "pdf" || mime === "application/pdf") return "PDF";
+        return "Fichier";
+      }
+
+      function getModuleById(moduleId) {
+        return getAllModules().find((module) => module.id === moduleId);
+      }
+
+      function formatDate(value) {
+        if (!value) return "";
+        try {
+          return new Intl.DateTimeFormat("fr-FR", {
+            day: "2-digit",
+            month: "short",
+            year: "numeric",
+          }).format(new Date(value));
+        } catch (_error) {
+          return "";
+        }
+      }
+
+      async function extractPdfText(file) {
+        if (!window.pdfjsLib || file.type !== "application/pdf") return "";
+
+        const buffer = await file.arrayBuffer();
+        const pdf = await window.pdfjsLib.getDocument({ data: buffer }).promise;
+        const pages = [];
+
+        for (let pageNumber = 1; pageNumber <= pdf.numPages; pageNumber += 1) {
+          const page = await pdf.getPage(pageNumber);
+          const content = await page.getTextContent();
+          const text = content.items.map((item) => item.str).join(" ");
+          pages.push(`Page ${pageNumber}\n${text}`);
+        }
+
+        return pages.join("\n\n").slice(0, 90000);
+      }
+
+      async function loadRemoteResources() {
+        if (!supabaseClient) return;
+        const { data: modules, error: modulesError } = await supabaseClient
+          .from("custom_modules")
+          .select("*")
+          .order("created_at", { ascending: false });
+
+        if (!modulesError) {
+          customModules = (modules || []).map((module) => ({
+            id: module.id,
+            titre: module.titre,
+            semestre: module.semestre,
+            resume: module.resume || "",
+            objectifs: module.objectifs || [],
+            chapitres: module.chapitres || [],
+            ressources: [],
+            exposes: module.exposes || [],
+            projets: module.projets || [],
+            forum: [],
+            custom: true,
+          }));
+        }
+
+        const { data: resources, error: resourcesError } = await supabaseClient
+          .from("course_resources")
+          .select("*")
+          .order("created_at", { ascending: false });
+
+        if (!resourcesError) {
+          remoteResources = resources || [];
+        }
+
+        const { data: topics, error: topicsError } = await supabaseClient
+          .from("forum_topics")
+          .select("*")
+          .order("created_at", { ascending: false });
+
+        if (!topicsError) {
+          remoteForumTopics = topics || [];
+        }
+
+        const { data: announcements, error: announcementsError } = await supabaseClient
+          .from("announcements")
+          .select("*")
+          .order("created_at", { ascending: false });
+
+        if (!announcementsError) {
+          remoteAnnouncements = announcements || [];
+        }
+
+        if (currentUser) {
+          const { data: submissions, error: submissionsError } = await supabaseClient
+            .from("student_submissions")
+            .select("*")
+            .order("created_at", { ascending: false });
+
+          if (!submissionsError) {
+            remoteSubmissions = submissions || [];
+          }
+
+          const { data: requests, error: requestsError } = await supabaseClient
+            .from("course_requests")
+            .select("*")
+            .order("created_at", { ascending: false });
+
+          if (!requestsError) {
+            remoteCourseRequests = requests || [];
+          }
+        } else {
+          remoteSubmissions = [];
+          remoteCourseRequests = [];
+        }
+      }
+
+      async function refreshSession() {
+        if (!supabaseClient) return;
+        const { data } = await supabaseClient.auth.getSession();
+        currentUser = data.session ? data.session.user : null;
+        await loadRemoteResources();
+        render();
+      }
+
+      async function handleLogin(event) {
+        event.preventDefault();
+        if (!supabaseClient) {
+          setAdminMessage("Supabase n'est pas encore disponible. Vérifiez la connexion internet de la page.", "error");
+          return;
+        }
+
+        const form = event.currentTarget;
+        const email = form.elements.email.value.trim();
+        const password = form.elements.password.value;
+        setAdminMessage("Connexion en cours...", "ok");
+        const { data, error } = await supabaseClient.auth.signInWithPassword({ email, password });
+
+        if (error) {
+          setAdminMessage(error.message, "error");
+          return;
+        }
+
+        currentUser = data.user;
+        await loadRemoteResources();
+        setAdminMessage("Connexion administrateur réussie.", "ok");
+      }
+
+      async function handleCreateModule(event) {
+        event.preventDefault();
+        if (!supabaseClient || !currentUser) {
+          setAdminMessage("Connectez-vous d'abord à l'espace administrateur.", "error");
+          return;
+        }
+
+        const form = event.currentTarget;
+        const title = form.elements.titre.value.trim();
+        const semester = form.elements.semestre.value.trim();
+        const summary = form.elements.resume.value.trim();
+
+        if (!title || !semester || !summary) {
+          setAdminMessage("Complétez le titre, le semestre et le résumé du module.", "error");
+          return;
+        }
+
+        const { error } = await supabaseClient.from("custom_modules").insert({
+          titre: title,
+          semestre: semester,
+          resume: summary,
+          objectifs: toList(form.elements.objectifs.value),
+          chapitres: toList(form.elements.chapitres.value),
+          exposes: toList(form.elements.exposes.value),
+          projets: toList(form.elements.projets.value),
+          created_by: currentUser.id,
+        });
+
+        if (error) {
+          setAdminMessage(error.message, "error");
+          return;
+        }
+
+        form.reset();
+        await loadRemoteResources();
+        setAdminMessage("Module ajouté avec succès.", "ok");
+      }
+
+      async function handleLogout() {
+        if (!supabaseClient) return;
+        currentUser = null;
+        clearLocalAuthSession();
+        setAdminMessage("Vous êtes déconnecté.", "ok");
+
+        try {
+          await withTimeout(
+            supabaseClient.auth.signOut({ scope: "local" }),
+            5000,
+            "La déconnexion Supabase prend trop de temps."
+          );
+        } catch (error) {
+          clearLocalAuthSession();
+          console.warn("Déconnexion locale appliquée.", error);
+        }
+      }
+
+      async function handleDeleteResource(resourceId) {
+        if (!supabaseClient || !currentUser) {
+          setAdminMessage("Connectez-vous d'abord à l'espace administrateur.", "error");
+          return;
+        }
+
+        const resource = remoteResources.find((item) => item.id === resourceId);
+        if (!resource) {
+          setAdminMessage("Cours introuvable. Rechargez la page puis réessayez.", "error");
+          return;
+        }
+
+        const confirmed = window.confirm(`Supprimer définitivement le cours "${resource.title}" ?`);
+        if (!confirmed) return;
+
+        setAdminMessageWithoutRender("Suppression du cours en cours...", "ok");
+
+        if (resource.file_path) {
+          const { error: storageError } = await supabaseClient.storage
+            .from(STORAGE_BUCKET)
+            .remove([resource.file_path]);
+
+          if (storageError) {
+            setAdminMessage(storageError.message, "error");
+            return;
+          }
+        }
+
+        const { error: deleteError } = await supabaseClient
+          .from("course_resources")
+          .delete()
+          .eq("id", resource.id);
+
+        if (deleteError) {
+          setAdminMessage(deleteError.message, "error");
+          return;
+        }
+
+        await loadRemoteResources();
+        setAdminMessage("Cours supprimé avec succès.", "ok");
+      }
+
+      async function handleUpload(event) {
+        event.preventDefault();
+        if (!supabaseClient || !currentUser) {
+          setAdminMessage("Connectez-vous d'abord à l'espace administrateur.", "error");
+          return;
+        }
+
+        const form = event.currentTarget;
+        const moduleId = form.elements.module_id.value;
+        const title = form.elements.title.value.trim();
+        const file = form.elements.resource_file.files[0];
+
+        if (!file || !isAcceptedCourseFile(file)) {
+          setAdminMessage("Choisissez un fichier valide : PDF, Word, PowerPoint, Excel, MP3, MP4, MOV ou WebM.", "error");
+          return;
+        }
+
+        setAdminMessageWithoutRender(file.type === "application/pdf" ? "Analyse du PDF en cours..." : "Préparation du fichier en cours...", "ok");
+        let contentText = "";
+        try {
+          contentText = await extractPdfText(file);
+        } catch (_error) {
+          contentText = "";
+        }
+
+        setAdminMessageWithoutRender("Téléversement du fichier en cours...", "ok");
+        const filePath = `${moduleId}/${Date.now()}-${cleanFileName(file.name)}`;
+        let uploadResult;
+        try {
+          uploadResult = await withTimeout(
+            supabaseClient.storage.from(STORAGE_BUCKET).upload(filePath, file, {
+              cacheControl: "3600",
+              contentType: file.type || "application/octet-stream",
+              upsert: false,
+            }),
+            120000,
+            "Le téléversement prend trop de temps. Essayez avec un fichier plus léger ou vérifiez votre connexion."
+          );
+        } catch (error) {
+          setAdminMessage(error.message, "error");
+          return;
+        }
+
+        const { error: uploadError } = uploadResult;
+
+        if (uploadError) {
+          setAdminMessage(uploadError.message, "error");
+          return;
+        }
+
+        setAdminMessageWithoutRender("Enregistrement de la ressource en cours...", "ok");
+        const { data: publicData } = supabaseClient.storage.from(STORAGE_BUCKET).getPublicUrl(filePath);
+        const { error: insertError } = await supabaseClient.from("course_resources").insert({
+          module_id: moduleId,
+          title,
+          file_name: file.name,
+          file_path: filePath,
+          file_url: publicData.publicUrl,
+          file_size: file.size,
+          mime_type: file.type || "application/octet-stream",
+          content_text: contentText,
+          created_by: currentUser.id,
+        });
+
+        if (insertError) {
+          setAdminMessage(insertError.message, "error");
+          return;
+        }
+
+        form.reset();
+        await loadRemoteResources();
+        setAdminMessage("Ressource ajoutée avec succès.", "ok");
+      }
+
+      async function handleStudentSubmission(event) {
+        event.preventDefault();
+        if (!supabaseClient) {
+          setModuleMessage("Supabase n'est pas encore disponible. Vérifiez la connexion internet.", "error");
+          return;
+        }
+
+        const form = event.currentTarget;
+        const type = form.dataset.submissionType;
+        const moduleId = form.elements.module_id.value;
+        const studentName = form.elements.student_name.value.trim();
+        const studentEmail = form.elements.student_email.value.trim();
+        const title = form.elements.title.value.trim();
+        const file = form.elements.file.files[0];
+
+        if (!file) {
+          setModuleMessage("Choisissez un fichier à déposer.", "error");
+          return;
+        }
+
+        setModuleMessage("Envoi du fichier en cours...", "ok");
+        const filePath = `${type}/${moduleId}/${Date.now()}-${cleanFileName(file.name)}`;
+        const { error: uploadError } = await supabaseClient.storage
+          .from(SUBMISSIONS_BUCKET)
+          .upload(filePath, file, {
+            cacheControl: "3600",
+            contentType: file.type || "application/octet-stream",
+            upsert: false,
+          });
+
+        if (uploadError) {
+          setModuleMessage(uploadError.message, "error");
+          return;
+        }
+
+        const { data: publicData } = supabaseClient.storage.from(SUBMISSIONS_BUCKET).getPublicUrl(filePath);
+        const { error: insertError } = await supabaseClient.from("student_submissions").insert({
+          module_id: moduleId,
+          submission_type: type,
+          student_name: studentName,
+          student_email: studentEmail,
+          title,
+          file_name: file.name,
+          file_path: filePath,
+          file_url: publicData.publicUrl,
+          file_size: file.size,
+        });
+
+        if (insertError) {
+          setModuleMessage(insertError.message, "error");
+          return;
+        }
+
+        form.reset();
+        setModuleMessage(type === "expose" ? "Exposé déposé avec succès." : "Projet soumis avec succès.", "ok");
+      }
+
+      async function handleForumTopic(event) {
+        event.preventDefault();
+        if (!supabaseClient) {
+          setModuleMessage("Supabase n'est pas encore disponible. Vérifiez la connexion internet.", "error");
+          return;
+        }
+
+        const form = event.currentTarget;
+        const { error } = await supabaseClient.from("forum_topics").insert({
+          module_id: form.elements.module_id.value,
+          author_name: form.elements.author_name.value.trim(),
+          subject: form.elements.subject.value.trim(),
+          message: form.elements.message.value.trim(),
+        });
+
+        if (error) {
+          setModuleMessage(error.message, "error");
+          return;
+        }
+
+        form.reset();
+        await loadRemoteResources();
+        setModuleMessage("Sujet publié dans le forum.", "ok");
+      }
+
+      async function handleAnnouncement(event) {
+        event.preventDefault();
+        if (!supabaseClient || !currentUser) {
+          setAdminMessage("Connectez-vous d'abord à l'espace administrateur.", "error");
+          return;
+        }
+
+        const form = event.currentTarget;
+        const { error } = await supabaseClient.from("announcements").insert({
+          title: form.elements.title.value.trim(),
+          message: form.elements.message.value.trim(),
+          created_by: currentUser.id,
+        });
+
+        if (error) {
+          setAdminMessage(error.message, "error");
+          return;
+        }
+
+        form.reset();
+        await loadRemoteResources();
+        setAdminMessage("Annonce publiée avec succès.", "ok");
+      }
+
+      async function handleCourseRequest(event) {
+        event.preventDefault();
+        const form = event.currentTarget;
+        const payload = {
+          requester_name: form.elements.requester_name.value.trim(),
+          requester_email: form.elements.requester_email.value.trim(),
+          requested_title: form.elements.requested_title.value.trim(),
+          module_context: form.elements.module_context.value.trim(),
+          message: form.elements.message.value.trim(),
+        };
+
+        if (!payload.requester_name || !payload.requester_email || !payload.requested_title) {
+          courseRequestMessage = { text: "Complétez au moins le nom, l’email et le titre demandé.", type: "error" };
+          render();
+          return;
+        }
+
+        if (!supabaseClient) {
+          courseRequestMessage = {
+            text: "Demande préparée. Envoyez-la depuis le site publié en ligne pour qu’elle soit enregistrée.",
+            type: "ok",
+          };
+          render();
+          return;
+        }
+
+        courseRequestMessage = { text: "Envoi de la demande en cours...", type: "ok" };
+        render();
+
+        const { error } = await supabaseClient.from("course_requests").insert(payload);
+        if (error) {
+          courseRequestMessage = { text: error.message, type: "error" };
+          render();
+          return;
+        }
+
+        form.reset();
+        courseRequestMessage = { text: "Demande envoyée avec succès.", type: "ok" };
+        await loadRemoteResources();
+        render();
+      }
+
+      async function handleDeleteCourseRequest(requestId) {
+        if (!supabaseClient || !currentUser) return;
+        const confirmed = window.confirm("Supprimer cette demande de cours ?");
+        if (!confirmed) return;
+
+        setAdminMessageWithoutRender("Suppression de la demande en cours...", "ok");
+        const { error } = await supabaseClient.from("course_requests").delete().eq("id", requestId);
+
+        if (error) {
+          setAdminMessage(error.message, "error");
+          return;
+        }
+
+        await loadRemoteResources();
+        setAdminMessage("Demande supprimée avec succès.", "ok");
+      }
+
+      function normalizeSearchText(value) {
+        return String(value)
+          .toLowerCase()
+          .normalize("NFD")
+          .replace(/[\u0300-\u036f]/g, "");
+      }
+
+      function findRelevantModules(question) {
+        const query = normalizeSearchText(question);
+        return getAllModules()
+          .map((module) => {
+            const text = [
+              module.titre,
+              module.semestre,
+              module.resume,
+              module.objectifs.join(" "),
+              module.chapitres.join(" "),
+              module.exposes.join(" "),
+              module.projets.join(" "),
+              getRemoteResources(module.id).map((resource) => resource.title).join(" "),
+            ]
+              .join(" ")
+              .toLowerCase()
+              .normalize("NFD")
+              .replace(/[\u0300-\u036f]/g, "");
+            const words = query.split(/\s+/).filter((word) => word.length > 2);
+            const score = words.reduce((total, word) => total + (text.includes(word) ? 1 : 0), 0);
+            return { module, score };
+          })
+          .filter((item) => item.score > 0)
+          .sort((a, b) => b.score - a.score)
+          .slice(0, 3)
+          .map((item) => item.module);
+      }
+
+      function moduleActions(modules) {
+        return modules.map((module) => ({
+          label: `Ouvrir ${module.titre}`,
+          moduleId: module.id,
+        }));
+      }
+
+      function summarizeModule(module) {
+        const onlineResources = getRemoteResources(module.id);
+        return `${module.titre} (${module.semestre})\n\nRésumé : ${module.resume}\n\nObjectifs principaux :\n${module.objectifs
+          .map((item) => `- ${item}`)
+          .join("\n")}\n\nPlan du cours :\n${module.chapitres
+          .map((item, index) => `- Chapitre ${index + 1} : ${item}`)
+          .join("\n")}\n\nRessources disponibles : ${module.ressources.length + onlineResources.length}.`;
+      }
+
+      function buildModuleQuiz(module) {
+        const questions = [
+          `Expliquez en quelques lignes l’objectif principal du module "${module.titre}".`,
+          `Citez deux notions importantes du chapitre "${module.chapitres[0] || module.titre}".`,
+          `Donnez un exemple pratique lié au module "${module.titre}".`,
+          `Quel lien peut-on faire entre ce module et le leadership managérial ?`,
+          `Proposez une mini étude de cas ou une situation professionnelle liée à ce module.`,
+        ];
+        return `Quiz d’entraînement - ${module.titre}\n\n${questions
+          .map((item, index) => `${index + 1}. ${item}`)
+          .join("\n")}\n\nConseil : répondez d’abord sans regarder le cours, puis comparez avec les objectifs et le plan du module.`;
+      }
+
+      function buildStudyPlan(module) {
+        return `Plan de révision - ${module.titre}\n\nJour 1 : relire le résumé du module, comprendre les objectifs, noter les mots-clés.\n\nJour 2 : travailler les chapitres : ${module.chapitres.join(", ")}.\n\nJour 3 : préparer une synthèse d’une page et répondre à un mini quiz d’entraînement.\n\nJour 4 : appliquer le module à un cas réel de management ou d’organisation.\n\nPriorité : commencez par "${module.objectifs[0] || module.titre}".`;
+      }
+
+      function listModuleResources(module) {
+        const onlineResources = getRemoteResources(module.id);
+        const staticResources = module.ressources.map(
+          (resource) => `- ${resource.nom} (${resource.type}) : ${resource.statut}`
+        );
+        const uploadedResources = onlineResources.map(
+          (resource) => `- ${resource.title} : ${getResourceKind(resource)} ajouté en ligne`
+        );
+        return `Ressources pour ${module.titre}\n\n${[...staticResources, ...uploadedResources].join("\n") || "- Aucune ressource publiée pour le moment."}\n\nPour ouvrir une ressource ajoutée, ouvrez la fiche du module puis allez dans Cours et ressources.`;
+      }
+
+      function buildResourceAiQuestion(resource, action) {
+        const module = getModuleById(resource.module_id);
+        const modulePart = module ? ` du module "${module.titre}"` : "";
+        const filePart = resource.file_name ? ` (fichier : ${resource.file_name})` : "";
+        if (action === "quiz") {
+          return `Crée un quiz complet avec réponses à partir de la ressource "${resource.title}"${modulePart}${filePart}.`;
+        }
+        return `Fais un résumé détaillé, structuré et pédagogique de la ressource "${resource.title}"${modulePart}${filePart}.`;
+      }
+
+      function renderResourceAiButtons(resource) {
+        return `
+          <button class="ai-action-button" data-resource-ai="summary" data-resource-id="${escapeHtml(resource.id)}">
+            Résumé IA
+          </button>
+          <button class="ai-action-button" data-resource-ai="quiz" data-resource-id="${escapeHtml(resource.id)}">
+            Quiz IA
+          </button>
+        `;
+      }
+
+      function hasExtractedPdfText() {
+        return remoteResources.some((resource) => resource.content_text && resource.content_text.trim().length > 80);
+      }
+
+      function buildAiContext(question) {
+        const relevantModules = findRelevantModules(question);
+        const modules = relevantModules.length ? relevantModules : getAllModules().slice(0, 3);
+        let remainingChars = 65000;
+
+        return modules.map((module) => {
+          const resources = getRemoteResources(module.id)
+            .filter((resource) => resource.content_text)
+            .map((resource) => {
+              const text = resource.content_text.slice(0, Math.max(0, Math.min(remainingChars, 18000)));
+              remainingChars -= text.length;
+              return {
+                title: resource.title,
+                fileName: resource.file_name,
+                text,
+              };
+            })
+            .filter((resource) => resource.text);
+
+          return {
+            id: module.id,
+            title: module.titre,
+            semester: module.semestre,
+            summary: module.resume,
+            objectives: module.objectifs,
+            chapters: module.chapitres,
+            resources,
+          };
+        });
+      }
+
+      function inferAiTask(question) {
+        const lower = normalizeSearchText(question);
+        if (lower.includes("quiz") || lower.includes("qcm") || lower.includes("questionnaire")) return "quiz";
+        if (lower.includes("revision") || lower.includes("reviser") || lower.includes("exam") || lower.includes("plan")) return "study_plan";
+        if (lower.includes("resume") || lower.includes("synthese")) return "summary";
+        if (lower.includes("explique") || lower.includes("expliquer") || lower.includes("comprendre")) return "explanation";
+        if (lower.includes("question") || lower.includes("reponse")) return "qa";
+        return "chat";
+      }
+
+      async function callDocumentAi(question) {
+        if (!hasExtractedPdfText()) {
+          throw new Error("Aucun texte PDF analysé n’est encore disponible.");
+        }
+
+        const response = await fetch("/.netlify/functions/ai-assistant", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            task: inferAiTask(question),
+            question,
+            modules: buildAiContext(question),
+          }),
+        });
+
+        if (!response.ok) {
+          const errorPayload = await response.json().catch(() => ({}));
+          throw new Error(errorPayload.error || "L’assistant IA connecté n’est pas encore disponible.");
+        }
+
+        return response.json();
+      }
+
+      function buildAiResponse(question) {
+        const lower = normalizeSearchText(question);
+        const relevantModules = findRelevantModules(question);
+        const mainModule = relevantModules[0];
+
+        if (
+          (lower.includes("upload") || lower.includes("cours") || lower.includes("pdf")) &&
+          !lower.includes("quiz") &&
+          !lower.includes("qcm") &&
+          !lower.includes("questionnaire") &&
+          !lower.includes("revision") &&
+          !lower.includes("reviser") &&
+          !lower.includes("resume") &&
+          !lower.includes("synthese") &&
+          !lower.includes("plan")
+        ) {
+          if (mainModule && (lower.includes("ressource") || lower.includes("pdf") || lower.includes("cours"))) {
+            return { text: listModuleResources(mainModule), actions: moduleActions([mainModule]) };
+          }
+          return {
+            text:
+              "Pour ajouter une ressource : allez dans Administration, connectez-vous avec le compte administrateur, choisissez le module, écrivez le titre, sélectionnez un fichier PDF, Word, PowerPoint, Excel, audio ou vidéo, puis cliquez sur Ajouter la ressource au module. Les étudiants la verront ensuite dans la fiche du module, section Cours et ressources.",
+          };
+        }
+
+        if (lower.includes("quiz") || lower.includes("qcm") || lower.includes("questionnaire")) {
+          if (mainModule) return { text: buildModuleQuiz(mainModule), actions: moduleActions([mainModule]) };
+          return { text: "Indiquez le nom d’un module pour générer un quiz. Exemple : “quiz statistiques appliquées”." };
+        }
+
+        if (lower.includes("revision") || lower.includes("reviser") || lower.includes("exam") || lower.includes("plan")) {
+          if (mainModule) return { text: buildStudyPlan(mainModule), actions: moduleActions([mainModule]) };
+          return { text: "Indiquez le module à réviser. Exemple : “plan de révision intelligence artificielle”." };
+        }
+
+        if (lower.includes("resume") || lower.includes("résumé") || lower.includes("synthese") || lower.includes("synthèse")) {
+          if (mainModule) return { text: summarizeModule(mainModule), actions: moduleActions([mainModule]) };
+          return { text: "Indiquez le module à résumer. Exemple : “résumé management des organisations”." };
+        }
+
+        if (lower.includes("expose")) {
+          return {
+            text:
+              "Pour déposer un exposé : allez dans Modules, ouvrez le module concerné, cliquez sur Déposer un exposé, remplissez le nom, l’email, le titre et choisissez le fichier. L’administrateur pourra le consulter dans Administration, section Dépôts reçus.",
+            actions: relevantModules.length ? moduleActions(relevantModules) : [],
+          };
+        }
+
+        if (lower.includes("projet")) {
+          return {
+            text:
+              "Pour soumettre un projet : ouvrez le module, cliquez sur Soumettre un projet, remplissez le formulaire et envoyez le fichier. Le dépôt sera visible par l’administrateur dans l’espace Administration.",
+            actions: relevantModules.length ? moduleActions(relevantModules) : [],
+          };
+        }
+
+        if (lower.includes("forum") || lower.includes("question") || lower.includes("sujet")) {
+          return {
+            text:
+              "Pour utiliser le forum : ouvrez un module, cliquez sur Nouveau sujet, puis publiez votre question ou message. Le sujet apparaîtra dans le forum du module.",
+            actions: relevantModules.length ? moduleActions(relevantModules) : [],
+          };
+        }
+
+        if (lower.includes("admin") || lower.includes("administration") || lower.includes("mot de passe")) {
+          return {
+            text:
+              "L’espace Administration sert à gérer les cours, publier des annonces et voir les dépôts reçus. Il faut se connecter avec l’email administrateur configuré dans Supabase.",
+          };
+        }
+
+        if (lower.includes("module") || lower.includes("semestre") || relevantModules.length) {
+          if (!relevantModules.length) {
+            return {
+              text: `La plateforme contient ${getAllModules().length} modules actifs sur les Semestres 7 et 8. Vous pouvez utiliser l’onglet Modules ou la recherche pour trouver un module précis.`,
+            };
+          }
+
+          return {
+            text: `J’ai trouvé ces modules qui semblent correspondre :\n\n${relevantModules
+              .map((module) => `- ${module.titre} (${module.semestre}) : ${module.resume}`)
+              .join("\n")}\n\nJe peux aussi générer un résumé, un quiz ou un plan de révision pour l’un de ces modules.`,
+            actions: moduleActions(relevantModules),
+          };
+        }
+
+        return {
+          text:
+            "Je peux maintenant aider à :\n\n- trouver un module ;\n- résumer un module ;\n- générer un quiz ;\n- créer un plan de révision ;\n- expliquer comment ajouter un PDF ;\n- guider le dépôt d’exposé ou de projet ;\n- expliquer le forum et l’administration.\n\nEssayez : “résumé statistiques appliquées”, “quiz intelligence artificielle” ou “plan de révision management”.",
+        };
+      }
+
+      function getAiFallbackNote(error) {
+        if (hasExtractedPdfText()) {
+          return `\n\nNote : la réponse avancée par IA n’a pas pu être générée pour le moment (${error.message}). Vérifiez la fonction Netlify et la clé OpenAI.`;
+        }
+        return "\n\nNote : pour générer à partir des vrais PDF, les cours doivent être uploadés avec la nouvelle version du site afin que leur texte soit extrait.";
+      }
+
+      async function addAiExchange(question) {
+        const relevantModules = findRelevantModules(question);
+        aiMessages = [
+          ...aiMessages,
+          { role: "user", text: question },
+          { role: "assistant", text: "Analyse des documents en cours..." },
+        ];
+        render();
+
+        try {
+          const response = await callDocumentAi(question);
+          aiMessages = aiMessages.map((message, index) =>
+            index === aiMessages.length - 1
+              ? {
+                  role: "assistant",
+                  text: response.answer,
+                  actions: moduleActions(relevantModules),
+                }
+              : message
+          );
+        } catch (error) {
+          const response = buildAiResponse(question);
+          aiMessages = aiMessages.map((message, index) =>
+            index === aiMessages.length - 1
+              ? {
+                  role: "assistant",
+                  text: response.text + getAiFallbackNote(error),
+                  actions: response.actions || moduleActions(relevantModules),
+                }
+              : message
+          );
+        }
+      }
+
+      async function handleAiSubmit(event) {
+        event.preventDefault();
+        const form = event.currentTarget;
+        const question = form.elements.ai_question.value.trim();
+        if (!question) return;
+
+        form.reset();
+        await addAiExchange(question);
+        render();
+        const chat = document.querySelector("#aiChat");
+        if (chat) chat.scrollTop = chat.scrollHeight;
+      }
+
+      function addLocalAiExchange(question) {
+        const response = buildAiResponse(question);
+        aiMessages = [
+          ...aiMessages,
+          { role: "user", text: question },
+          { role: "assistant", text: response.text, actions: response.actions || [] },
+        ];
+      }
+
+      function filteredModules() {
+        const query = recherche.toLowerCase().trim();
+        if (!query) return getAllModules();
+        return getAllModules().filter((module) => {
+          return [module.titre, module.resume, module.semestre].some((field) =>
+            field.toLowerCase().includes(query)
+          );
+        });
+      }
+
+      function setActiveView(view) {
+        activeView = view;
+        selectedModuleId = null;
+        activeModuleAction = null;
+        moduleMessage = null;
+        navButtons.forEach((button) => {
+          button.classList.toggle("active", button.dataset.view === view);
+        });
+        render();
+      }
+
+      function openModule(moduleId) {
+        selectedModuleId = moduleId;
+        activeModuleAction = null;
+        moduleMessage = null;
+        render();
+        window.scrollTo({ top: document.querySelector(".shell").offsetTop - 12, behavior: "smooth" });
+      }
+
+      function renderHome() {
+        const latestResources = remoteResources.slice(0, 8);
+        return `
+          <div class="stack">
+            <section class="section">
+              <h2>Vue d’ensemble de la plateforme</h2>
+              <p>Cette version transforme le site en une plateforme structurée avec pages détaillées par module, espace administrateur pour téléverser et mettre à jour les cours, interfaces dédiées aux exposés et projets, ainsi qu’un forum de discussion pour les échanges pédagogiques.</p>
+            </section>
+
+            <section class="section">
+              <div class="forum-row">
+                <div>
+                  <h2>Derniers cours et ressources ajoutés</h2>
+                  <p>Les supports publiés par l’administration apparaissent ici automatiquement.</p>
+                </div>
+                <button class="secondary-button" data-view-modules>${icon("library")} Tous les modules</button>
+              </div>
+              <div class="list-stack">
+                ${
+                  latestResources.length
+                    ? latestResources
+                        .map((resource) => {
+                          const module = getModuleById(resource.module_id);
+                          return `
+                            <div class="list-item bordered">
+                              <div class="forum-row">
+                                <div>
+                                  <strong>${escapeHtml(resource.title)}</strong>
+                                  <div style="margin-top:6px;color:#64748b;font-size:13px">
+                                    ${escapeHtml(getResourceKind(resource))}
+                                    ${module ? ` - ${escapeHtml(module.titre)} (${escapeHtml(module.semestre)})` : ""}
+                                    ${resource.created_at ? ` - ${escapeHtml(formatDate(resource.created_at))}` : ""}
+                                  </div>
+                                  <div style="margin-top:6px;color:#64748b;font-size:13px">${escapeHtml(resource.file_name || "ressource")}</div>
+                                </div>
+                                <div class="ai-actions">
+                                  <a class="resource-link" href="${escapeHtml(getResourceUrl(resource))}" target="_blank" rel="noopener">
+                                    ${icon("book")} Ouvrir / télécharger
+                                  </a>
+                                  ${renderResourceAiButtons(resource)}
+                                  ${
+                                    module
+                                      ? `<button class="ai-action-button" data-open-module="${escapeHtml(module.id)}">Voir le module</button>`
+                                      : ""
+                                  }
+                                </div>
+                              </div>
+                            </div>
+                          `;
+                        })
+                        .join("")
+                    : '<div class="soft-box">Aucun cours ajouté pour le moment. Les nouvelles ressources apparaîtront ici après publication depuis l’administration.</div>'
+                }
+              </div>
+            </section>
+
+            ${
+              remoteAnnouncements.length
+                ? `<section class="section">
+                    <h2>Annonces récentes</h2>
+                    <div class="list-stack">
+                      ${remoteAnnouncements
+                        .slice(0, 4)
+                        .map(
+                          (item) => `
+                            <div class="list-item bordered">
+                              <strong>${escapeHtml(item.title)}</strong>
+                              <div style="margin-top:8px;color:#475569">${escapeHtml(item.message)}</div>
+                            </div>
+                          `
+                        )
+                        .join("")}
+                    </div>
+                  </section>`
+                : ""
+            }
+
+            <div class="cards-4">
+              ${[
+                { icon: "library", title: "Catalogue des cours", text: "Cours classés par semestre, leçons, durée et ressources." },
+                { icon: "layers", title: "Parcours", text: "Suivi de progression avec leçons marquées comme terminées." },
+                { icon: "book", title: "Documents", text: "Bibliothèque centralisée des fichiers et supports ajoutés." },
+                { icon: "message", title: "Demander un cours", text: "Formulaire pour proposer un nouveau cours ou document." },
+              ]
+                .map(
+                  (item) => `
+                    <section class="admin-card mini-card">
+                      <span class="icon-box">${icon(item.icon)}</span>
+                      <h3 style="margin-top:16px">${escapeHtml(item.title)}</h3>
+                      <p>${escapeHtml(item.text)}</p>
+                    </section>
+                  `
+                )
+                .join("")}
+            </div>
+
+            <section class="section">
+              <h2>Parcours d’utilisation</h2>
+              <div class="cards-2" style="margin-top:18px">
+                <div class="soft-box"><strong>Étudiant :</strong> consulte les modules, télécharge les cours, voit les consignes des exposés, soumet les projets et participe au forum.</div>
+                <div class="soft-box"><strong>Administrateur :</strong> ajoute les ressources, met à jour les contenus, ouvre des sujets de discussion, publie les exposés et gère les projets.</div>
+              </div>
+            </section>
+          </div>
+        `;
+      }
+
+      function renderAiAssistant() {
+        const prompts = [
+          "Quels sont les modules d’intelligence artificielle ?",
+          "Résumé du module statistiques appliquées",
+          "Quiz intelligence artificielle",
+          "Plan de révision management des organisations",
+          "Comment déposer un exposé ?",
+          "Comment ajouter un cours PDF ?",
+        ];
+
+        return `
+          <div class="stack">
+            <section class="section">
+              <div class="admin-head">
+                <span class="icon-box">${icon("sparkles")}</span>
+                <div>
+                  <h2>Assistant IA pédagogique</h2>
+                  <p>Posez une question sur les modules, les cours, les exposés, les projets, le forum ou l’administration.</p>
+                </div>
+              </div>
+            </section>
+
+            <section class="section">
+              <div class="ai-chat" id="aiChat">
+                ${aiMessages
+                  .map(
+                    (message) => `
+                      <div class="ai-message ${message.role}">
+                        ${escapeHtml(message.text)}
+                        ${
+                          message.actions && message.actions.length
+                            ? `<div class="ai-actions">
+                                ${message.actions
+                                  .map(
+                                    (action) => `
+                                      <button class="ai-action-button" data-ai-open-module="${escapeHtml(action.moduleId)}">
+                                        ${escapeHtml(action.label)}
+                                      </button>
+                                    `
+                                  )
+                                  .join("")}
+                              </div>`
+                            : ""
+                        }
+                      </div>
+                    `
+                  )
+                  .join("")}
+              </div>
+
+              <form class="form-grid" id="aiForm" style="margin-top:16px">
+                <div class="field">
+                  <label for="aiQuestion">Votre question</label>
+                  <textarea id="aiQuestion" name="ai_question" placeholder="Exemple : comment trouver le cours de statistiques ?" required></textarea>
+                </div>
+                <button class="primary-button" type="submit">${icon("sparkles")} Demander à l’assistant</button>
+              </form>
+            </section>
+
+            <section class="section">
+              <h2>Questions rapides</h2>
+              <div class="quick-prompts" style="margin-top:16px">
+                ${prompts
+                  .map(
+                    (prompt) => `
+                      <button class="secondary-button" data-ai-prompt="${escapeHtml(prompt)}">${escapeHtml(prompt)}</button>
+                    `
+                  )
+                  .join("")}
+              </div>
+              <div class="notice" style="margin-top:16px">
+                Mode avancé : l’assistant utilise le texte extrait des PDF uploadés avec la nouvelle version du site. Si la fonction OpenAI n’est pas encore configurée dans Netlify, il répond avec le mode pédagogique local.
+              </div>
+            </section>
+          </div>
+        `;
+      }
+
+      function renderModules() {
+        const modules = filteredModules();
+        const moduleIds = new Set(modules.map((module) => module.id));
+        const groups = semestres
+          .map((semestre) => ({
+            ...semestre,
+            modules: getAllModules().filter(
+              (module) => module.semestre === semestre.titre && moduleIds.has(module.id)
+            ),
+          }))
+          .filter((semestre) => semestre.modules.length);
+
+        return `
+          <div class="stack">
+            <section class="section">
+              <div class="eyebrow">Programme officiel</div>
+              <h2>Catalogue des cours</h2>
+              <p>Une structure pédagogique organisée par semestre, avec le nombre de leçons, la durée estimée, l’accès aux documents, le quiz IA et le suivi de progression.</p>
+            </section>
+            ${
+              groups.length
+                ? groups
+                    .map(
+                      (semestre, index) => `
+                        <section class="section program-block">
+                          <div class="program-number">${String(index + 1).padStart(2, "0")}</div>
+                          <div>
+                            <h2>${escapeHtml(semestre.titre)}</h2>
+                            <p>${escapeHtml(
+                              semestre.statut === "Actif"
+                                ? "Modules disponibles pour consultation, ressources, progression et entraînement."
+                                : "Espace prévu pour les prochains modules."
+                            )}</p>
+                            <div class="modules-grid" style="margin-top:18px">
+                              ${semestre.modules.map(renderModuleCard).join("")}
+                            </div>
+                          </div>
+                        </section>
+                      `
+                    )
+                    .join("")
+                : '<div class="empty">Aucun module ne correspond à votre recherche.</div>'
+            }
+          </div>
+        `;
+      }
+
+      function renderModuleCard(module) {
+        const progress = getModuleProgress(module);
+        const resourcesCount = module.ressources.length + getRemoteResources(module.id).length;
+        return `
+          <article class="module-card">
+            <div class="card-top">
+              <div>
+                <h3>${escapeHtml(module.titre)}</h3>
+                <div class="semester-label">${escapeHtml(module.semestre)}</div>
+              </div>
+              <span class="tag">${escapeHtml(getModuleStatus(module))}</span>
+            </div>
+            <p>${escapeHtml(module.resume)}</p>
+            <div class="course-meta">
+              <span class="chip">${getModuleLessonCount(module)} leçons</span>
+              <span class="chip">${escapeHtml(getModuleDuration(module))}</span>
+              <span class="chip">${resourcesCount} ressources</span>
+            </div>
+            <div style="margin-top:14px">
+              ${renderProgressBar(progress)}
+              <div style="margin-top:7px;color:#64748b;font-size:12px;font-weight:800">${progress.percent}% terminé</div>
+            </div>
+            <div class="chips">
+              ${module.ressources
+                .slice(0, 3)
+                .map((item) => `<span class="chip">${escapeHtml(item.type)}</span>`)
+                .join("")}
+            </div>
+            <button class="link-button" data-open-module="${escapeHtml(module.id)}">
+              Ouvrir la fiche détaillée ${icon("chevronRight")}
+            </button>
+          </article>
+        `;
+      }
+
+      function renderLearningPath() {
+        const modules = getAllModules();
+        const totalLessons = modules.reduce((total, module) => total + getModuleProgress(module).count, 0);
+        const doneLessons = modules.reduce((total, module) => total + getModuleProgress(module).done, 0);
+        const globalProgress = {
+          done: doneLessons,
+          count: totalLessons || 1,
+          percent: totalLessons ? Math.round((doneLessons / totalLessons) * 100) : 0,
+        };
+
+        return `
+          <div class="stack">
+            <section class="section">
+              <div class="eyebrow">Parcours personnel</div>
+              <h2>Votre chemin de révision</h2>
+              <p>Suivez les modules étape par étape. La progression est enregistrée dans votre navigateur.</p>
+              <div style="margin-top:18px">
+                ${renderProgressBar(globalProgress)}
+                <div style="margin-top:8px;color:#64748b;font-weight:800">${globalProgress.done}/${globalProgress.count} leçons terminées</div>
+              </div>
+            </section>
+
+            ${semestres
+              .map((semestre, index) => {
+                const semesterModules = getAllModules().filter((module) => module.semestre === semestre.titre);
+                return `
+                  <section class="section program-block">
+                    <div class="program-number">${String(index + 1).padStart(2, "0")}</div>
+                    <div>
+                      <h2>${escapeHtml(semestre.titre)}</h2>
+                      <p>${escapeHtml(semestre.statut === "Actif" ? "Étape active du parcours." : "Étape à venir.")}</p>
+                      <div class="list-stack">
+                        ${
+                          semesterModules.length
+                            ? semesterModules
+                                .map((module) => {
+                                  const progress = getModuleProgress(module);
+                                  return `
+                                    <div class="list-item bordered">
+                                      <div class="forum-row">
+                                        <div>
+                                          <strong>${escapeHtml(module.titre)}</strong>
+                                          <div style="margin-top:6px;color:#64748b;font-size:13px">${progress.done}/${progress.count} leçons - ${escapeHtml(getModuleDuration(module))}</div>
+                                        </div>
+                                        <button class="ai-action-button" data-open-module="${escapeHtml(module.id)}">Continuer</button>
+                                      </div>
+                                      <div style="margin-top:12px">${renderProgressBar(progress)}</div>
+                                    </div>
+                                  `;
+                                })
+                                .join("")
+                            : '<div class="soft-box">Modules à ajouter prochainement.</div>'
+                        }
+                      </div>
+                    </div>
+                  </section>
+                `;
+              })
+              .join("")}
+          </div>
+        `;
+      }
+
+      function renderDocuments() {
+        const staticDocuments = getAllStaticDocuments();
+        return `
+          <div class="stack">
+            <section class="section">
+              <div class="eyebrow">Bibliothèque</div>
+              <h2>Documents et ressources</h2>
+              <p>Tous les supports du Master sont centralisés ici : fichiers ajoutés en ligne, supports de cours, fiches, vidéos, audios et exercices.</p>
+            </section>
+
+            <section class="section">
+              <h2>Fichiers ajoutés en ligne</h2>
+              <div class="list-stack">
+                ${
+                  remoteResources.length
+                    ? remoteResources
+                        .map((resource) => {
+                          const module = getModuleById(resource.module_id);
+                          return `
+                            <div class="list-item bordered">
+                              <div class="forum-row">
+                                <div>
+                                  <strong>${escapeHtml(resource.title)}</strong>
+                                  <div style="margin-top:6px;color:#64748b;font-size:13px">
+                                    ${escapeHtml(getResourceKind(resource))}
+                                    ${module ? ` - ${escapeHtml(module.titre)} (${escapeHtml(module.semestre)})` : ""}
+                                  </div>
+                                  <div style="margin-top:6px;color:#64748b;font-size:13px">${escapeHtml(resource.file_name || "ressource")}</div>
+                                </div>
+                                <div class="ai-actions">
+                                  <a class="resource-link" href="${escapeHtml(getResourceUrl(resource))}" target="_blank" rel="noopener">
+                                    ${icon("book")} Ouvrir
+                                  </a>
+                                  ${renderResourceAiButtons(resource)}
+                                  ${module ? `<button class="ai-action-button" data-open-module="${escapeHtml(module.id)}">Module</button>` : ""}
+                                </div>
+                              </div>
+                            </div>
+                          `;
+                        })
+                        .join("")
+                    : '<div class="soft-box">Aucun fichier ajouté en ligne pour le moment.</div>'
+                }
+              </div>
+            </section>
+
+            <section class="section">
+              <h2>Supports prévus par module</h2>
+              <div class="list-stack">
+                ${staticDocuments
+                  .map(
+                    (document) => `
+                      <div class="list-item bordered">
+                        <div class="forum-row">
+                          <div>
+                            <strong>${escapeHtml(document.title)}</strong>
+                            <div style="margin-top:6px;color:#64748b;font-size:13px">${escapeHtml(document.kind)} - ${escapeHtml(document.module.titre)}</div>
+                          </div>
+                          <div class="ai-actions">
+                            <span class="chip">${escapeHtml(document.status)}</span>
+                            <button class="ai-action-button" data-open-module="${escapeHtml(document.module.id)}">Voir module</button>
+                          </div>
+                        </div>
+                      </div>
+                    `
+                  )
+                  .join("")}
+              </div>
+            </section>
+          </div>
+        `;
+      }
+
+      function renderCourseRequest() {
+        const messageHtml = courseRequestMessage
+          ? `<div class="message show ${courseRequestMessage.type}">${escapeHtml(courseRequestMessage.text)}</div>`
+          : "";
+
+        return `
+          <div class="stack">
+            <section class="section">
+              <div class="eyebrow">Demande pédagogique</div>
+              <h2>Demander un cours</h2>
+              <p>Proposez un cours, un chapitre, une fiche ou une ressource à ajouter à la plateforme.</p>
+            </section>
+
+            <section class="section">
+              <div class="list-stack">
+                ${messageHtml}
+                <form class="form-grid" id="courseRequestForm">
+                  <div class="cards-2">
+                    <div class="field">
+                      <label for="requesterName">Nom complet</label>
+                      <input id="requesterName" name="requester_name" type="text" required />
+                    </div>
+                    <div class="field">
+                      <label for="requesterEmail">Email</label>
+                      <input id="requesterEmail" name="requester_email" type="email" required />
+                    </div>
+                  </div>
+                  <div class="field">
+                    <label for="requestedTitle">Cours ou document demandé</label>
+                    <input id="requestedTitle" name="requested_title" type="text" placeholder="Exemple : Fiche de révision sur Business Intelligence" required />
+                  </div>
+                  <div class="field">
+                    <label for="moduleContext">Module concerné</label>
+                    <select id="moduleContext" name="module_context">
+                      <option value="">Je ne sais pas</option>
+                      ${getModuleOptions()}
+                    </select>
+                  </div>
+                  <div class="field">
+                    <label for="requestMessage">Précisions</label>
+                    <textarea id="requestMessage" name="message" placeholder="Expliquez le besoin, le format souhaité ou l’urgence."></textarea>
+                  </div>
+                  <button class="primary-button" type="submit">${icon("message")} Envoyer la demande</button>
+                </form>
+              </div>
+            </section>
+          </div>
+        `;
+      }
+
+      function renderModuleActionPanel(module) {
+        if (!activeModuleAction && !moduleMessage) return "";
+
+        const messageHtml = moduleMessage
+          ? `<div class="message show ${moduleMessage.type}">${escapeHtml(moduleMessage.text)}</div>`
+          : "";
+
+        if (activeModuleAction === "forum") {
+          return `
+            <section class="section" id="moduleActionPanel">
+              <h2>Nouveau sujet de forum</h2>
+              <p>Publiez une question ou un message lié au module ${escapeHtml(module.titre)}.</p>
+              <div class="list-stack">
+                ${messageHtml}
+                <form class="form-grid" id="forumTopicForm">
+                  <input type="hidden" name="module_id" value="${escapeHtml(module.id)}" />
+                  <div class="cards-2">
+                    <div class="field">
+                      <label for="forumAuthor">Nom</label>
+                      <input id="forumAuthor" name="author_name" type="text" required />
+                    </div>
+                    <div class="field">
+                      <label for="forumSubject">Sujet</label>
+                      <input id="forumSubject" name="subject" type="text" required />
+                    </div>
+                  </div>
+                  <div class="field">
+                    <label for="forumMessage">Message</label>
+                    <textarea id="forumMessage" name="message" required></textarea>
+                  </div>
+                  <button class="green-button" type="submit">${icon("message")} Publier le sujet</button>
+                </form>
+              </div>
+            </section>
+          `;
+        }
+
+        const isExpose = activeModuleAction === "expose";
+        const title = isExpose ? "Déposer un exposé" : "Soumettre un projet";
+        const buttonText = isExpose ? "Envoyer l'exposé" : "Envoyer le projet";
+
+        return `
+          <section class="section" id="moduleActionPanel">
+            <h2>${title}</h2>
+            <p>Envoyez votre fichier pour le module ${escapeHtml(module.titre)}. Les formats PDF, Word, PowerPoint, Excel, audio et vidéo sont acceptés.</p>
+            <div class="list-stack">
+              ${messageHtml}
+              <form class="form-grid" id="studentSubmissionForm" data-submission-type="${escapeHtml(activeModuleAction)}">
+                <input type="hidden" name="module_id" value="${escapeHtml(module.id)}" />
+                <div class="cards-2">
+                  <div class="field">
+                    <label for="studentName">Nom complet</label>
+                    <input id="studentName" name="student_name" type="text" required />
+                  </div>
+                  <div class="field">
+                    <label for="studentEmail">Email</label>
+                    <input id="studentEmail" name="student_email" type="email" required />
+                  </div>
+                </div>
+                <div class="field">
+                  <label for="submissionTitle">Titre</label>
+                  <input id="submissionTitle" name="title" type="text" required />
+                </div>
+                <div class="field">
+                  <label for="submissionFile">Fichier</label>
+                  <input id="submissionFile" name="file" type="file" accept="${COURSE_ACCEPT_ATTRIBUTE}" required />
+                </div>
+                <button class="primary-button" type="submit">${icon("upload")} ${buttonText}</button>
+              </form>
+            </div>
+          </section>
+        `;
+      }
+
+      function renderModuleDetails(module) {
+        const onlineResources = getRemoteResources(module.id);
+        const onlineForumTopics = getRemoteForumTopics(module.id);
+        const progress = getModuleProgress(module);
+        return `
+          <div class="stack">
+            <button class="back-button" data-back-modules>${icon("chevronLeft")} Retour aux modules</button>
+
+            <section class="section">
+              <div class="detail-hero">
+                <div>
+                  <div class="eyebrow">Fiche détaillée du module</div>
+                  <h1>${escapeHtml(module.titre)}</h1>
+                  <div class="detail-meta">${escapeHtml(module.semestre)}</div>
+                  <p>${escapeHtml(module.resume)}</p>
+                </div>
+                <aside class="status-box">
+                  <strong>État du contenu</strong>
+                  <div>Leçons : ${progress.done}/${progress.count}</div>
+                  <div>Ressources : ${module.ressources.length + onlineResources.length}</div>
+                  <div>Exposés : ${module.exposes.length}</div>
+                  <div>Projets : ${module.projets.length}</div>
+                  <div>Sujets forum : ${module.forum.length}</div>
+                  <div style="margin-top:10px">${renderProgressBar(progress)}</div>
+                </aside>
+              </div>
+            </section>
+
+            ${renderModuleActionPanel(module)}
+
+            <div class="cards-2">
+              <section class="section">
+                <h2>Objectifs pédagogiques</h2>
+                <div class="list-stack">
+                  ${module.objectifs
+                    .map((item) => `<div class="list-item">${icon("check")} <span>${escapeHtml(item)}</span></div>`)
+                    .join("")}
+                </div>
+              </section>
+
+              <section class="section">
+                <h2>Plan du cours</h2>
+                <div class="list-stack">
+                  ${getModuleLessonTitles(module)
+                    .map(
+                      (item, index) => {
+                        const done = isLessonDone(module.id, index);
+                        return `
+                          <div class="list-item bordered lesson-row ${done ? "done" : ""}">
+                            <div>
+                              <strong>Leçon ${index + 1} :</strong> ${escapeHtml(item)}
+                              <div style="margin-top:5px;color:#64748b;font-size:12px;font-weight:800">${done ? "Terminée" : "À travailler"} - 35 min estimées</div>
+                            </div>
+                            <button class="${done ? "green-button" : "secondary-button"}" data-toggle-lesson="${escapeHtml(module.id)}" data-lesson-index="${index}">
+                              ${done ? "Terminée" : "Marquer terminé"}
+                            </button>
+                          </div>
+                        `;
+                      }
+                    )
+                    .join("")}
+                </div>
+              </section>
+            </div>
+
+            <div class="cards-3">
+              <section class="section">
+                <h2>Cours et ressources</h2>
+                <div class="list-stack">
+                  ${module.ressources
+                    .map(
+                      (item) => `
+                        <div class="list-item bordered">
+                          <strong>${escapeHtml(item.nom)}</strong>
+                          <div style="margin-top:6px;color:#64748b">Type : ${escapeHtml(item.type)}</div>
+                          <span class="chip" style="margin-top:10px;display:inline-flex">${escapeHtml(item.statut)}</span>
+                        </div>
+                      `
+                    )
+                    .join("")}
+                  ${onlineResources
+                    .map(
+                      (item) => `
+                        <div class="list-item bordered">
+                          <strong>${escapeHtml(item.title)}</strong>
+                          <div style="margin-top:6px;color:#64748b">${escapeHtml(getResourceKind(item))} ajouté en ligne : ${escapeHtml(item.file_name || "ressource")}</div>
+                          <div class="ai-actions">
+                            <a class="resource-link" href="${escapeHtml(getResourceUrl(item))}" target="_blank" rel="noopener">
+                              ${icon("book")} Ouvrir / télécharger
+                            </a>
+                            ${renderResourceAiButtons(item)}
+                          </div>
+                        </div>
+                      `
+                    )
+                    .join("")}
+                </div>
+              </section>
+
+              <section class="section">
+                <h2>Interface Exposés</h2>
+                <div class="list-stack">
+                  ${module.exposes.map((item) => `<div class="list-item">${escapeHtml(item)}</div>`).join("")}
+                  <button class="primary-button" data-module-action="expose">${icon("upload")} Déposer un exposé</button>
+                </div>
+              </section>
+
+              <section class="section">
+                <h2>Interface Projets</h2>
+                <div class="list-stack">
+                  ${module.projets.map((item) => `<div class="list-item">${escapeHtml(item)}</div>`).join("")}
+                  <button class="dark-button" data-module-action="project">${icon("briefcase")} Soumettre un projet</button>
+                </div>
+              </section>
+            </div>
+
+            <section class="section">
+              <div class="forum-row">
+                <h2>Forum de discussion du module</h2>
+                <button class="green-button" data-module-action="forum">${icon("message")} Nouveau sujet</button>
+              </div>
+              <div class="list-stack">
+                ${module.forum
+                  .map(
+                    (item) => `
+                      <div class="list-item bordered">
+                        <div class="forum-row">
+                          <div>
+                            <strong>${escapeHtml(item.sujet)}</strong>
+                            <div style="margin-top:5px;color:#64748b;font-size:13px">Publié par : ${escapeHtml(item.auteur)}</div>
+                          </div>
+                          <span class="chip">${item.reponses} réponses</span>
+                        </div>
+                      </div>
+                    `
+                  )
+                  .join("")}
+                ${onlineForumTopics
+                  .map(
+                    (item) => `
+                      <div class="list-item bordered">
+                        <div class="forum-row">
+                          <div>
+                            <strong>${escapeHtml(item.subject)}</strong>
+                            <div style="margin-top:5px;color:#64748b;font-size:13px">Publié par : ${escapeHtml(item.author_name || "Étudiant")}</div>
+                            <div style="margin-top:8px;color:#475569">${escapeHtml(item.message || "")}</div>
+                          </div>
+                          <span class="chip">Nouveau</span>
+                        </div>
+                      </div>
+                    `
+                  )
+                  .join("")}
+              </div>
+            </section>
+          </div>
+        `;
+      }
+
+      function renderPublishedResourcesAdmin() {
+        if (!currentUser) return "";
+
+        return `
+          <section class="section">
+            <h2>Cours publiés</h2>
+            <p>Les ressources visibles sur le site apparaissent ici. Vous pouvez les ouvrir ou les supprimer.</p>
+            <div class="list-stack">
+              ${
+                remoteResources.length
+                  ? remoteResources
+                      .map((resource) => {
+                        const module = getModuleById(resource.module_id);
+                        return `
+                          <div class="list-item bordered">
+                            <div class="forum-row">
+                              <div>
+                                <strong>${escapeHtml(resource.title)}</strong>
+                                <div style="margin-top:6px;color:#64748b;font-size:13px">
+                                  ${escapeHtml(getResourceKind(resource))}
+                                  ${module ? ` - ${escapeHtml(module.titre)} (${escapeHtml(module.semestre)})` : ""}
+                                  ${resource.created_at ? ` - ${escapeHtml(formatDate(resource.created_at))}` : ""}
+                                </div>
+                                <div style="margin-top:6px;color:#64748b;font-size:13px">${escapeHtml(resource.file_name || "ressource")}</div>
+                              </div>
+                              <div class="ai-actions">
+                                <a class="resource-link" href="${escapeHtml(getResourceUrl(resource))}" target="_blank" rel="noopener">
+                                  ${icon("book")} Ouvrir
+                                </a>
+                                <button class="danger-button" data-delete-resource="${escapeHtml(resource.id)}">
+                                  Supprimer
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        `;
+                      })
+                      .join("")
+                  : '<div class="soft-box">Aucun cours publié pour le moment.</div>'
+              }
+            </div>
+          </section>
+        `;
+      }
+
+      function renderAdmin() {
+        const messageHtml = adminMessage
+          ? `<div class="message show ${adminMessage.type}">${escapeHtml(adminMessage.text)}</div>`
+          : "";
+        const authBlock = !supabaseClient
+          ? `
+              <div class="notice">
+                La bibliothèque Supabase n'est pas chargée. Une fois le site publié en ligne avec internet, la connexion et l'upload seront disponibles.
+              </div>
+            `
+          : currentUser
+            ? `
+                <div class="auth-card">
+                  <div class="forum-row">
+                    <div>
+                      <strong>Connecté comme administrateur</strong>
+                      <div style="margin-top:6px;color:#64748b;font-size:14px">${escapeHtml(currentUser.email || "")}</div>
+                    </div>
+                    <button class="secondary-button" data-admin-logout>Se déconnecter</button>
+                  </div>
+                </div>
+                <form class="form-grid" id="uploadForm" style="margin-top:16px">
+                  <div class="cards-2">
+                    <div class="field">
+                      <label for="courseModule">Module</label>
+                      <select id="courseModule" name="module_id" required>${getModuleOptions()}</select>
+                    </div>
+                    <div class="field">
+                      <label for="courseTitle">Titre du cours</label>
+                      <input id="courseTitle" name="title" type="text" placeholder="Exemple : Chapitre 1 - Introduction" required />
+                    </div>
+                  </div>
+                  <div class="field">
+                    <label for="courseFile">Fichier du cours</label>
+                    <input id="courseFile" name="resource_file" type="file" accept="${COURSE_ACCEPT_ATTRIBUTE}" required />
+                    <div style="color:#64748b;font-size:13px;line-height:1.5">
+                      Formats acceptés : PDF, Word, PowerPoint, Excel, MP3, MP4, MOV, WebM.
+                    </div>
+                  </div>
+                  <button class="primary-button" type="submit">${icon("upload")} Ajouter la ressource au module</button>
+                </form>
+                <form class="form-grid" id="createModuleForm" style="margin-top:24px">
+                  <h3 style="margin:0;font-size:19px">Ajouter un module</h3>
+                  <div class="cards-2">
+                    <div class="field">
+                      <label for="newModuleTitle">Titre du module</label>
+                      <input id="newModuleTitle" name="titre" type="text" placeholder="Exemple : Marketing digital" required />
+                    </div>
+                    <div class="field">
+                      <label for="newModuleSemester">Semestre</label>
+                      <select id="newModuleSemester" name="semestre" required>
+                        <option value="Semestre 7">Semestre 7</option>
+                        <option value="Semestre 8">Semestre 8</option>
+                        <option value="Semestre 9">Semestre 9</option>
+                        <option value="Semestre 10">Semestre 10</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="field">
+                    <label for="newModuleSummary">Résumé du module</label>
+                    <textarea id="newModuleSummary" name="resume" required></textarea>
+                  </div>
+                  <div class="cards-2">
+                    <div class="field">
+                      <label for="newModuleObjectives">Objectifs pédagogiques</label>
+                      <textarea id="newModuleObjectives" name="objectifs" placeholder="Un objectif par ligne"></textarea>
+                    </div>
+                    <div class="field">
+                      <label for="newModuleChapters">Plan du cours</label>
+                      <textarea id="newModuleChapters" name="chapitres" placeholder="Un chapitre par ligne"></textarea>
+                    </div>
+                  </div>
+                  <div class="cards-2">
+                    <div class="field">
+                      <label for="newModuleExposes">Sujets d’exposés</label>
+                      <textarea id="newModuleExposes" name="exposes" placeholder="Un sujet par ligne"></textarea>
+                    </div>
+                    <div class="field">
+                      <label for="newModuleProjects">Projets</label>
+                      <textarea id="newModuleProjects" name="projets" placeholder="Un projet par ligne"></textarea>
+                    </div>
+                  </div>
+                  <button class="dark-button" type="submit">${icon("library")} Créer le module</button>
+                </form>
+                <form class="form-grid" id="announcementForm" style="margin-top:24px">
+                  <h3 style="margin:0;font-size:19px">Publier une annonce</h3>
+                  <div class="field">
+                    <label for="announcementTitle">Titre de l'annonce</label>
+                    <input id="announcementTitle" name="title" type="text" required />
+                  </div>
+                  <div class="field">
+                    <label for="announcementMessage">Message</label>
+                    <textarea id="announcementMessage" name="message" required></textarea>
+                  </div>
+                  <button class="green-button" type="submit">${icon("message")} Publier l'annonce</button>
+                </form>
+              `
+            : `
+                <form class="form-grid" id="loginForm">
+                  <div class="cards-2">
+                    <div class="field">
+                      <label for="adminEmail">Email administrateur</label>
+                      <input id="adminEmail" name="email" type="email" autocomplete="email" required />
+                    </div>
+                    <div class="field">
+                      <label for="adminPassword">Mot de passe</label>
+                      <input id="adminPassword" name="password" type="password" autocomplete="current-password" required />
+                    </div>
+                  </div>
+                  <button class="primary-button" type="submit">${icon("settings")} Se connecter</button>
+                </form>
+              `;
+
+        return `
+          <div class="stack">
+            <section class="section">
+              <div class="admin-head">
+                <span class="icon-box">${icon("settings")}</span>
+                <div>
+                  <h2>Espace Administration</h2>
+                  <p>Interface de pilotage des contenus pédagogiques, mises à jour et publication des ressources.</p>
+                </div>
+              </div>
+            </section>
+
+            <section class="section">
+              <h2>Connexion et upload réel des cours</h2>
+              <p>Connectez-vous avec le compte administrateur Supabase, choisissez un module, puis ajoutez une ressource : PDF, Word, PowerPoint, Excel, audio ou vidéo. Elle apparaîtra automatiquement dans la fiche du module.</p>
+              <div class="list-stack">
+                ${messageHtml}
+                ${authBlock}
+              </div>
+            </section>
+
+            ${renderPublishedResourcesAdmin()}
+
+            ${
+              currentUser
+                ? `<section class="section">
+                    <h2>Dépôts reçus</h2>
+                    <p>Les exposés et projets déposés par les étudiants apparaissent ici.</p>
+                    <div class="list-stack">
+                      ${
+                        remoteSubmissions.length
+                          ? remoteSubmissions
+                              .slice(0, 10)
+                              .map((item) => {
+                                const module = getAllModules().find((moduleItem) => moduleItem.id === item.module_id);
+                                return `
+                                  <div class="list-item bordered">
+                                    <strong>${escapeHtml(item.title)}</strong>
+                                    <div style="margin-top:6px;color:#64748b">
+                                      ${escapeHtml(item.submission_type === "expose" ? "Exposé" : "Projet")} -
+                                      ${escapeHtml(module ? module.titre : item.module_id)} -
+                                      ${escapeHtml(item.student_name || "Étudiant")}
+                                    </div>
+                                    <a class="resource-link" href="${escapeHtml(getSubmissionUrl(item))}" target="_blank" rel="noopener">
+                                      ${icon("book")} Ouvrir le fichier
+                                    </a>
+                                  </div>
+                                `;
+                              })
+                              .join("")
+                          : '<div class="soft-box">Aucun dépôt étudiant pour le moment.</div>'
+                      }
+                    </div>
+                  </section>`
+                : ""
+            }
+
+            ${
+              currentUser
+                ? `<section class="section">
+                    <h2>Demandes de cours</h2>
+                    <p>Les étudiants peuvent proposer les cours, fiches ou documents à ajouter.</p>
+                    <div class="list-stack">
+                      ${
+                        remoteCourseRequests.length
+                          ? remoteCourseRequests
+                              .slice(0, 12)
+                              .map((item) => {
+                                const module = item.module_context ? getModuleById(item.module_context) : null;
+                                return `
+                                  <div class="list-item bordered">
+                                    <div class="forum-row">
+                                      <div>
+                                        <strong>${escapeHtml(item.requested_title)}</strong>
+                                        <div style="margin-top:6px;color:#64748b;font-size:13px">
+                                          ${escapeHtml(item.requester_name || "Étudiant")} - ${escapeHtml(item.requester_email || "")}
+                                          ${module ? ` - ${escapeHtml(module.titre)}` : ""}
+                                        </div>
+                                        <div style="margin-top:8px;color:#475569">${escapeHtml(item.message || "Aucune précision.")}</div>
+                                      </div>
+                                      <button class="danger-button" data-delete-course-request="${escapeHtml(item.id)}">Supprimer</button>
+                                    </div>
+                                  </div>
+                                `;
+                              })
+                              .join("")
+                          : '<div class="soft-box">Aucune demande de cours pour le moment.</div>'
+                      }
+                    </div>
+                  </section>`
+                : ""
+            }
+
+            <div class="cards-2">
+              ${adminPanels
+                .map(
+                  (panel) => `
+                    <section class="admin-card">
+                      <span class="icon-box" style="background:#f1f5f9;color:#1e293b">${icon(panel.icon)}</span>
+                      <h3 style="margin-top:16px">${escapeHtml(panel.titre)}</h3>
+                      <p>${escapeHtml(panel.description)}</p>
+                      <div class="soft-box" style="margin-top:18px">Actions possibles : téléversement, modification, archivage, publication, suppression, suivi des versions.</div>
+                    </section>
+                  `
+                )
+                .join("")}
+            </div>
+
+            <section class="section">
+              <h2>Panneau de mise à jour rapide</h2>
+              <div class="cards-2" style="margin-top:18px">
+                <div class="list-item bordered" style="border-style:dashed;padding:20px">
+                  <strong>Téléverser un nouveau cours</strong>
+                  <div style="margin-top:8px;color:#64748b">Utilisez le formulaire de connexion ci-dessus pour envoyer un PDF, Word, PowerPoint, Excel, audio ou vidéo vers Supabase Storage.</div>
+                </div>
+                <div class="list-item bordered" style="border-style:dashed;padding:20px">
+                  <strong>Publier une annonce ou mise à jour</strong>
+                  <div style="margin-top:8px;color:#64748b">Informer les étudiants d’un nouveau support, exposé ou projet.</div>
+                  <button class="green-button" data-scroll-announcement style="margin-top:16px">${icon("message")} Nouvelle annonce</button>
+                </div>
+              </div>
+            </section>
+          </div>
+        `;
+      }
+
+      function replaceIconPlaceholders(root = document) {
+        root.querySelectorAll("[data-icon]").forEach((slot) => {
+          slot.innerHTML = icon(slot.dataset.icon);
+        });
+      }
+
+      function bindRenderedEvents() {
+        app.querySelectorAll("[data-open-module]").forEach((button) => {
+          button.addEventListener("click", () => openModule(button.dataset.openModule));
+        });
+
+        const viewModulesButton = app.querySelector("[data-view-modules]");
+        if (viewModulesButton) {
+          viewModulesButton.addEventListener("click", () => setActiveView("modules"));
+        }
+
+        app.querySelectorAll("[data-module-action]").forEach((button) => {
+          button.addEventListener("click", () => {
+            activeModuleAction = button.dataset.moduleAction;
+            moduleMessage = null;
+            render();
+            const panel = document.querySelector("#moduleActionPanel");
+            if (panel) panel.scrollIntoView({ behavior: "smooth", block: "start" });
+          });
+        });
+
+        const back = app.querySelector("[data-back-modules]");
+        if (back) {
+          back.addEventListener("click", () => {
+            selectedModuleId = null;
+            activeView = "modules";
+            activeModuleAction = null;
+            moduleMessage = null;
+            navButtons.forEach((button) => {
+              button.classList.toggle("active", button.dataset.view === "modules");
+            });
+            render();
+          });
+        }
+
+        const loginForm = app.querySelector("#loginForm");
+        if (loginForm) {
+          loginForm.addEventListener("submit", handleLogin);
+        }
+
+        const uploadForm = app.querySelector("#uploadForm");
+        if (uploadForm) {
+          uploadForm.addEventListener("submit", handleUpload);
+        }
+
+        const createModuleForm = app.querySelector("#createModuleForm");
+        if (createModuleForm) {
+          createModuleForm.addEventListener("submit", handleCreateModule);
+        }
+
+        const studentSubmissionForm = app.querySelector("#studentSubmissionForm");
+        if (studentSubmissionForm) {
+          studentSubmissionForm.addEventListener("submit", handleStudentSubmission);
+        }
+
+        const forumTopicForm = app.querySelector("#forumTopicForm");
+        if (forumTopicForm) {
+          forumTopicForm.addEventListener("submit", handleForumTopic);
+        }
+
+        const announcementForm = app.querySelector("#announcementForm");
+        if (announcementForm) {
+          announcementForm.addEventListener("submit", handleAnnouncement);
+        }
+
+        const courseRequestForm = app.querySelector("#courseRequestForm");
+        if (courseRequestForm) {
+          courseRequestForm.addEventListener("submit", handleCourseRequest);
+        }
+
+        const scrollAnnouncement = app.querySelector("[data-scroll-announcement]");
+        if (scrollAnnouncement) {
+          scrollAnnouncement.addEventListener("click", () => {
+            const form = document.querySelector("#announcementForm");
+            if (form) {
+              form.scrollIntoView({ behavior: "smooth", block: "start" });
+            } else {
+              setAdminMessage("Connectez-vous d'abord pour publier une annonce.", "error");
+            }
+          });
+        }
+
+        const aiForm = app.querySelector("#aiForm");
+        if (aiForm) {
+          aiForm.addEventListener("submit", handleAiSubmit);
+        }
+
+        app.querySelectorAll("[data-ai-prompt]").forEach((button) => {
+          button.addEventListener("click", async () => {
+            const question = button.dataset.aiPrompt;
+            await addAiExchange(question);
+            render();
+            const chat = document.querySelector("#aiChat");
+            if (chat) chat.scrollTop = chat.scrollHeight;
+          });
+        });
+
+        app.querySelectorAll("[data-ai-open-module]").forEach((button) => {
+          button.addEventListener("click", () => {
+            activeView = "modules";
+            navButtons.forEach((navButton) => {
+              navButton.classList.toggle("active", navButton.dataset.view === "modules");
+            });
+            openModule(button.dataset.aiOpenModule);
+          });
+        });
+
+        app.querySelectorAll("[data-resource-ai]").forEach((button) => {
+          button.addEventListener("click", async () => {
+            const resource = remoteResources.find((item) => item.id === button.dataset.resourceId);
+            if (!resource) return;
+
+            activeView = "ai";
+            selectedModuleId = null;
+            navButtons.forEach((navButton) => {
+              navButton.classList.toggle("active", navButton.dataset.view === "ai");
+            });
+            await addAiExchange(buildResourceAiQuestion(resource, button.dataset.resourceAi));
+            render();
+            const chat = document.querySelector("#aiChat");
+            if (chat) chat.scrollTop = chat.scrollHeight;
+          });
+        });
+
+        app.querySelectorAll("[data-delete-resource]").forEach((button) => {
+          button.addEventListener("click", () => {
+            handleDeleteResource(button.dataset.deleteResource);
+          });
+        });
+
+        app.querySelectorAll("[data-delete-course-request]").forEach((button) => {
+          button.addEventListener("click", () => {
+            handleDeleteCourseRequest(button.dataset.deleteCourseRequest);
+          });
+        });
+
+        app.querySelectorAll("[data-toggle-lesson]").forEach((button) => {
+          button.addEventListener("click", () => {
+            toggleLessonCompletion(button.dataset.toggleLesson, Number(button.dataset.lessonIndex));
+          });
+        });
+
+        const logoutButton = app.querySelector("[data-admin-logout]");
+        if (logoutButton) {
+          logoutButton.addEventListener("click", handleLogout);
+        }
+      }
+
+      function render() {
+        const selectedModule = getAllModules().find((module) => module.id === selectedModuleId);
+        if (selectedModule) {
+          app.innerHTML = renderModuleDetails(selectedModule);
+        } else if (activeView === "admin") {
+          app.innerHTML = renderAdmin();
+        } else if (activeView === "ai") {
+          app.innerHTML = renderAiAssistant();
+        } else if (activeView === "path") {
+          app.innerHTML = renderLearningPath();
+        } else if (activeView === "documents") {
+          app.innerHTML = renderDocuments();
+        } else if (activeView === "request") {
+          app.innerHTML = renderCourseRequest();
+        } else if (activeView === "modules") {
+          app.innerHTML = renderModules();
+        } else {
+          app.innerHTML = renderHome();
+        }
+        bindRenderedEvents();
+      }
+
+      navButtons.forEach((button) => {
+        button.addEventListener("click", () => setActiveView(button.dataset.view));
+      });
+
+      searchInput.addEventListener("input", (event) => {
+        recherche = event.target.value;
+        if (!selectedModuleId && !["admin", "ai", "request"].includes(activeView)) {
+          activeView = "modules";
+          navButtons.forEach((button) => {
+            button.classList.toggle("active", button.dataset.view === "modules");
+          });
+        }
+        selectedModuleId = null;
+        render();
+      });
+
+      replaceIconPlaceholders();
+      if (supabaseClient) {
+        supabaseClient.auth.onAuthStateChange(async (_event, session) => {
+          currentUser = session ? session.user : null;
+          await loadRemoteResources();
+          render();
+        });
+        refreshSession();
+      } else {
+        render();
+      }
+    </script>
+  </body>
+</html>
