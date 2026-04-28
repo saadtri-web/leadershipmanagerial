@@ -1571,6 +1571,39 @@
         }
       }
 
+      function formatBytes(bytes) {
+        if (!bytes) return "0 Mo";
+        const mb = bytes / (1024 * 1024);
+        return `${mb.toFixed(mb >= 10 ? 0 : 1)} Mo`;
+      }
+
+      function getFriendlySupabaseError(error, step = "opération") {
+        const message = String(error && (error.message || error.error_description || error.details || error));
+        const lower = message.toLowerCase();
+
+        if (lower.includes("row-level security") || lower.includes("rls") || lower.includes("policy")) {
+          return `Supabase bloque ${step}. Il faut exécuter de nouveau le fichier supabase-setup.sql dans Supabase SQL Editor. Message technique : ${message}`;
+        }
+
+        if (lower.includes("bucket") || lower.includes("not found")) {
+          return `Le stockage Supabase n’est pas prêt pour ${step}. Vérifiez que le SQL a bien créé le bucket course-pdfs. Message technique : ${message}`;
+        }
+
+        if (lower.includes("jwt") || lower.includes("unauthorized") || lower.includes("not authenticated") || lower.includes("permission")) {
+          return `Votre session administrateur n’a pas l’autorisation pour ${step}. Déconnectez-vous, reconnectez-vous avec saadtri@gmail.com, puis réessayez. Message technique : ${message}`;
+        }
+
+        if (lower.includes("mime") || lower.includes("type")) {
+          return `Supabase bloque le format du fichier. Exécutez de nouveau supabase-setup.sql pour autoriser tous les formats. Message technique : ${message}`;
+        }
+
+        if (lower.includes("failed to fetch") || lower.includes("network")) {
+          return `Le navigateur n’arrive pas à contacter Supabase pendant ${step}. Essayez depuis le site Netlify en ligne, avec Chrome, puis rechargez la page.`;
+        }
+
+        return `Erreur pendant ${step} : ${message}`;
+      }
+
       function withTimeout(promise, milliseconds, message) {
         return Promise.race([
           promise,
@@ -1920,6 +1953,51 @@
         }
       }
 
+      async function handleSupabaseTest() {
+        if (!supabaseClient) {
+          setAdminMessage("Supabase n'est pas encore disponible. Test impossible depuis cette page.", "error");
+          return;
+        }
+
+        setAdminMessageWithoutRender("Test de la connexion Supabase en cours...", "ok");
+
+        const { data: sessionData, error: sessionError } = await supabaseClient.auth.getSession();
+        if (sessionError || !sessionData.session) {
+          setAdminMessage("Vous n’êtes pas connecté comme administrateur. Reconnectez-vous avec saadtri@gmail.com.", "error");
+          return;
+        }
+
+        currentUser = sessionData.session.user;
+        if ((currentUser.email || "").toLowerCase() !== "saadtri@gmail.com") {
+          setAdminMessage(`Vous êtes connecté avec ${currentUser.email || "un autre compte"}. Il faut utiliser saadtri@gmail.com.`, "error");
+          return;
+        }
+
+        const { error: readError } = await supabaseClient.from("course_resources").select("id").limit(1);
+        if (readError) {
+          setAdminMessage(getFriendlySupabaseError(readError, "la lecture de la base de données"), "error");
+          return;
+        }
+
+        const testPath = `_test/${Date.now()}-test-upload.txt`;
+        const testFile = new Blob(["test upload"], { type: "text/plain" });
+        const { error: uploadError } = await supabaseClient.storage
+          .from(STORAGE_BUCKET)
+          .upload(testPath, testFile, {
+            cacheControl: "60",
+            contentType: "text/plain",
+            upsert: false,
+          });
+
+        if (uploadError) {
+          setAdminMessage(getFriendlySupabaseError(uploadError, "le test d’upload"), "error");
+          return;
+        }
+
+        await supabaseClient.storage.from(STORAGE_BUCKET).remove([testPath]);
+        setAdminMessage("Test réussi : la connexion, le compte administrateur et le stockage Supabase sont corrects.", "ok");
+      }
+
       async function handleDeleteResource(resourceId) {
         if (!supabaseClient || !currentUser) {
           setAdminMessage("Connectez-vous d'abord à l'espace administrateur.", "error");
@@ -1974,21 +2052,43 @@
         const title = form.elements.title.value.trim();
         const file = form.elements.resource_file.files[0];
 
+        const { data: sessionData, error: sessionError } = await supabaseClient.auth.getSession();
+        if (sessionError || !sessionData.session) {
+          setAdminMessage("Votre session administrateur a expiré. Déconnectez-vous puis reconnectez-vous avec saadtri@gmail.com.", "error");
+          return;
+        }
+
+        currentUser = sessionData.session.user;
+        if ((currentUser.email || "").toLowerCase() !== "saadtri@gmail.com") {
+          setAdminMessage(`Vous êtes connecté avec ${currentUser.email || "un autre compte"}. L’upload est autorisé seulement pour saadtri@gmail.com.`, "error");
+          return;
+        }
+
         if (!file || !isAcceptedCourseFile(file)) {
           setAdminMessage("Choisissez un fichier valide : PDF, Word, PowerPoint, Excel, MP3, MP4, MOV ou WebM.", "error");
           return;
         }
 
         setUploadProgress(true);
-        setAdminMessageWithoutRender(file.type === "application/pdf" ? "Analyse du PDF en cours..." : "Préparation du fichier en cours...", "ok");
+        setAdminMessageWithoutRender(
+          `${file.type === "application/pdf" ? "Analyse du PDF" : "Préparation du fichier"} : ${file.name} (${formatBytes(file.size)})`,
+          "ok"
+        );
         let contentText = "";
         try {
-          contentText = await extractPdfText(file);
-        } catch (_error) {
+          contentText = await withTimeout(
+            extractPdfText(file),
+            20000,
+            "Analyse PDF trop longue. Le fichier sera ajouté sans texte IA."
+          );
+        } catch (error) {
+          if (file.type === "application/pdf") {
+            setAdminMessageWithoutRender(`${error.message} Téléversement du PDF en cours...`, "ok");
+          }
           contentText = "";
         }
 
-        setAdminMessageWithoutRender("Téléversement du fichier en cours...", "ok");
+        setAdminMessageWithoutRender(`Téléversement en cours : ${file.name} (${formatBytes(file.size)})`, "ok");
         const filePath = `${moduleId}/${Date.now()}-${cleanFileName(file.name)}`;
         let uploadResult;
         try {
@@ -2003,7 +2103,7 @@
           );
         } catch (error) {
           setUploadProgress(false);
-          setAdminMessage(error.message, "error");
+          setAdminMessage(getFriendlySupabaseError(error, "le téléversement du fichier"), "error");
           return;
         }
 
@@ -2011,7 +2111,7 @@
 
         if (uploadError) {
           setUploadProgress(false);
-          setAdminMessage(uploadError.message, "error");
+          setAdminMessage(getFriendlySupabaseError(uploadError, "le téléversement du fichier"), "error");
           return;
         }
 
@@ -2031,7 +2131,7 @@
 
         if (insertError) {
           setUploadProgress(false);
-          setAdminMessage(insertError.message, "error");
+          setAdminMessage(getFriendlySupabaseError(insertError, "l’enregistrement du cours"), "error");
           return;
         }
 
@@ -3475,7 +3575,10 @@
                       <strong>Connecté comme administrateur</strong>
                       <div style="margin-top:6px;color:#64748b;font-size:14px">${escapeHtml(currentUser.email || "")}</div>
                     </div>
-                    <button class="secondary-button" data-admin-logout>Se déconnecter</button>
+                    <div class="ai-actions">
+                      <button class="secondary-button" data-test-supabase>Tester la connexion Supabase</button>
+                      <button class="secondary-button" data-admin-logout>Se déconnecter</button>
+                    </div>
                   </div>
                 </div>
                 <form class="form-grid" id="uploadForm" style="margin-top:16px">
@@ -3809,6 +3912,11 @@
         const courseRequestForm = app.querySelector("#courseRequestForm");
         if (courseRequestForm) {
           courseRequestForm.addEventListener("submit", handleCourseRequest);
+        }
+
+        const testSupabaseButton = app.querySelector("[data-test-supabase]");
+        if (testSupabaseButton) {
+          testSupabaseButton.addEventListener("click", handleSupabaseTest);
         }
 
         const scrollAnnouncement = app.querySelector("[data-scroll-announcement]");
