@@ -711,6 +711,14 @@
         flex-wrap: wrap;
       }
 
+      .toolbar {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        flex-wrap: wrap;
+        margin-top: 18px;
+      }
+
       .ai-actions {
         display: flex;
         gap: 8px;
@@ -726,6 +734,103 @@
         padding: 8px 11px;
         font-size: 13px;
         font-weight: 900;
+      }
+
+      .tab-button,
+      .filter-button {
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: #fff;
+        color: #475569;
+        padding: 9px 13px;
+        font-size: 13px;
+        font-weight: 900;
+        cursor: pointer;
+      }
+
+      .tab-button.active,
+      .filter-button.active {
+        border-color: var(--sky-dark);
+        background: var(--sky-dark);
+        color: #fff;
+      }
+
+      .metric-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 14px;
+        margin-top: 18px;
+      }
+
+      .metric-card {
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        background: #fff;
+        padding: 16px;
+        box-shadow: var(--soft-shadow);
+      }
+
+      .metric-card strong {
+        display: block;
+        color: #0f172a;
+        font-size: 24px;
+        line-height: 1;
+        font-weight: 950;
+      }
+
+      .metric-card span {
+        display: block;
+        margin-top: 7px;
+        color: #64748b;
+        font-size: 13px;
+        font-weight: 800;
+      }
+
+      .preview-frame {
+        width: 100%;
+        min-height: 560px;
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        background: #f8fafc;
+      }
+
+      .media-preview {
+        width: 100%;
+        border-radius: 18px;
+        background: #0f172a;
+      }
+
+      .upload-progress {
+        display: none;
+        overflow: hidden;
+        height: 10px;
+        border-radius: 999px;
+        background: #e2e8f0;
+      }
+
+      .upload-progress.show {
+        display: block;
+      }
+
+      .upload-progress span {
+        display: block;
+        width: 40%;
+        height: 100%;
+        border-radius: inherit;
+        background: var(--sky-dark);
+        animation: uploadSlide 1.2s ease-in-out infinite;
+      }
+
+      @keyframes uploadSlide {
+        0% {
+          transform: translateX(-100%);
+        }
+        50% {
+          transform: translateX(110%);
+        }
+        100% {
+          transform: translateX(260%);
+        }
       }
 
       .detail-hero {
@@ -863,6 +968,7 @@
         .cards-4,
         .cards-3,
         .cards-2,
+        .metric-grid,
         .modules-grid,
         .stat-grid {
           grid-template-columns: 1fr;
@@ -1262,6 +1368,10 @@
       let activeView = "home";
       let selectedModuleId = null;
       let recherche = "";
+      let activeModuleTab = "cours";
+      let activePreviewResourceId = null;
+      let courseTypeFilter = "all";
+      let documentTypeFilter = "all";
       let currentUser = null;
       let customModules = [];
       let remoteResources = [];
@@ -1454,6 +1564,13 @@
         }
       }
 
+      function setUploadProgress(show) {
+        const progress = app.querySelector("#uploadProgress");
+        if (progress) {
+          progress.classList.toggle("show", Boolean(show));
+        }
+      }
+
       function withTimeout(promise, milliseconds, message) {
         return Promise.race([
           promise,
@@ -1510,6 +1627,102 @@
         if (["xls", "xlsx", "csv"].includes(extension)) return "Excel";
         if (extension === "pdf" || mime === "application/pdf") return "PDF";
         return "Fichier";
+      }
+
+      function getResourceKindSlug(resource) {
+        const kind = getResourceKind(resource).toLowerCase();
+        if (kind === "vidéo") return "video";
+        if (kind === "audio") return "audio";
+        if (kind === "pdf") return "pdf";
+        if (["word", "powerpoint", "excel", "fichier"].includes(kind)) return "document";
+        return "document";
+      }
+
+      function isPdfResource(resource) {
+        return getResourceKindSlug(resource) === "pdf";
+      }
+
+      function resourceMatchesFilter(resource, filter) {
+        return filter === "all" || getResourceKindSlug(resource) === filter;
+      }
+
+      function moduleMatchesCourseFilter(module) {
+        if (courseTypeFilter === "all" || courseTypeFilter === "quiz") return true;
+        const staticMatch = module.ressources.some((resource) => {
+          const kind = String(resource.type || "").toLowerCase();
+          if (courseTypeFilter === "pdf") return kind.includes("pdf");
+          if (courseTypeFilter === "video") return kind.includes("vidéo") || kind.includes("video");
+          if (courseTypeFilter === "audio") return kind.includes("audio");
+          return ["document", "fiche", "feuille", "td"].some((word) => kind.includes(word));
+        });
+        const onlineMatch = getRemoteResources(module.id).some((resource) =>
+          resourceMatchesFilter(resource, courseTypeFilter)
+        );
+        return staticMatch || onlineMatch;
+      }
+
+      function getLastModuleId() {
+        try {
+          return window.localStorage.getItem("leadership-last-module") || "";
+        } catch (_error) {
+          return "";
+        }
+      }
+
+      function saveLastModuleId(moduleId) {
+        try {
+          window.localStorage.setItem("leadership-last-module", moduleId);
+        } catch (_error) {
+          // Le raccourci de reprise reste optionnel.
+        }
+      }
+
+      function renderFilterButtons(activeFilter, target) {
+        const filters = [
+          ["all", "Tous"],
+          ["pdf", "PDF"],
+          ["video", "Vidéos"],
+          ["audio", "Audio"],
+          ["document", "Documents"],
+          ["quiz", "Quiz"],
+        ];
+        return filters
+          .map(([value, label]) => {
+            if (target === "documents" && value === "quiz") return "";
+            return `<button class="filter-button ${activeFilter === value ? "active" : ""}" data-filter-target="${target}" data-filter-value="${value}">${label}</button>`;
+          })
+          .join("");
+      }
+
+      function getDashboardMetrics() {
+        const modules = getAllModules();
+        const resources = remoteResources;
+        return [
+          { value: modules.length, label: "Modules" },
+          { value: resources.length, label: "Fichiers en ligne" },
+          { value: resources.filter((item) => getResourceKindSlug(item) === "video").length, label: "Vidéos" },
+          { value: remoteAnnouncements.length, label: "Annonces" },
+        ];
+      }
+
+      function renderResourcePreview(resource) {
+        if (!resource) return "";
+        const url = getResourceUrl(resource);
+        const kind = getResourceKindSlug(resource);
+        if (kind === "pdf") {
+          return `<iframe class="preview-frame" src="${escapeHtml(url)}" title="${escapeHtml(resource.title)}"></iframe>`;
+        }
+        if (kind === "video") {
+          return `<video class="media-preview" controls src="${escapeHtml(url)}"></video>`;
+        }
+        if (kind === "audio") {
+          return `<audio class="media-preview" controls src="${escapeHtml(url)}"></audio>`;
+        }
+        return `
+          <div class="soft-box">
+            L’aperçu intégré n’est pas disponible pour ce type de fichier. Utilisez le bouton Ouvrir / télécharger.
+          </div>
+        `;
       }
 
       function getModuleById(moduleId) {
@@ -1766,6 +1979,7 @@
           return;
         }
 
+        setUploadProgress(true);
         setAdminMessageWithoutRender(file.type === "application/pdf" ? "Analyse du PDF en cours..." : "Préparation du fichier en cours...", "ok");
         let contentText = "";
         try {
@@ -1788,6 +2002,7 @@
             "Le téléversement prend trop de temps. Essayez avec un fichier plus léger ou vérifiez votre connexion."
           );
         } catch (error) {
+          setUploadProgress(false);
           setAdminMessage(error.message, "error");
           return;
         }
@@ -1795,6 +2010,7 @@
         const { error: uploadError } = uploadResult;
 
         if (uploadError) {
+          setUploadProgress(false);
           setAdminMessage(uploadError.message, "error");
           return;
         }
@@ -1814,11 +2030,13 @@
         });
 
         if (insertError) {
+          setUploadProgress(false);
           setAdminMessage(insertError.message, "error");
           return;
         }
 
         form.reset();
+        setUploadProgress(false);
         await loadRemoteResources();
         setAdminMessage("Ressource ajoutée avec succès.", "ok");
       }
@@ -2313,11 +2531,13 @@
 
       function filteredModules() {
         const query = recherche.toLowerCase().trim();
-        if (!query) return getAllModules();
         return getAllModules().filter((module) => {
-          return [module.titre, module.resume, module.semestre].some((field) =>
-            field.toLowerCase().includes(query)
-          );
+          const matchesQuery =
+            !query ||
+            [module.titre, module.resume, module.semestre].some((field) =>
+              field.toLowerCase().includes(query)
+            );
+          return matchesQuery && moduleMatchesCourseFilter(module);
         });
       }
 
@@ -2326,6 +2546,7 @@
         selectedModuleId = null;
         activeModuleAction = null;
         moduleMessage = null;
+        activePreviewResourceId = null;
         navButtons.forEach((button) => {
           button.classList.toggle("active", button.dataset.view === view);
         });
@@ -2336,17 +2557,39 @@
         selectedModuleId = moduleId;
         activeModuleAction = null;
         moduleMessage = null;
+        activeModuleTab = "cours";
+        activePreviewResourceId = null;
+        saveLastModuleId(moduleId);
         render();
         window.scrollTo({ top: document.querySelector(".shell").offsetTop - 12, behavior: "smooth" });
       }
 
       function renderHome() {
         const latestResources = remoteResources.slice(0, 8);
+        const metrics = getDashboardMetrics();
+        const lastModule = getModuleById(getLastModuleId()) || getAllModules()[0];
         return `
           <div class="stack">
             <section class="section">
-              <h2>Vue d’ensemble de la plateforme</h2>
-              <p>Cette version transforme le site en une plateforme structurée avec pages détaillées par module, espace administrateur pour téléverser et mettre à jour les cours, interfaces dédiées aux exposés et projets, ainsi qu’un forum de discussion pour les échanges pédagogiques.</p>
+              <div class="forum-row">
+                <div>
+                  <h2>Tableau de bord étudiant</h2>
+                  <p>Accédez rapidement aux derniers cours, aux annonces, à votre parcours et à l’assistant IA.</p>
+                </div>
+                ${lastModule ? `<button class="primary-button" data-open-module="${escapeHtml(lastModule.id)}">${icon("chevronRight")} Continuer</button>` : ""}
+              </div>
+              <div class="metric-grid">
+                ${metrics
+                  .map(
+                    (item) => `
+                      <div class="metric-card">
+                        <strong>${escapeHtml(item.value)}</strong>
+                        <span>${escapeHtml(item.label)}</span>
+                      </div>
+                    `
+                  )
+                  .join("")}
+              </div>
             </section>
 
             <section class="section">
@@ -2543,6 +2786,9 @@
               <div class="eyebrow">Programme officiel</div>
               <h2>Catalogue des cours</h2>
               <p>Une structure pédagogique organisée par semestre, avec le nombre de leçons, la durée estimée, l’accès aux documents, le quiz IA et le suivi de progression.</p>
+              <div class="toolbar">
+                ${renderFilterButtons(courseTypeFilter, "courses")}
+              </div>
             </section>
             ${
               groups.length
@@ -2672,20 +2918,34 @@
 
       function renderDocuments() {
         const staticDocuments = getAllStaticDocuments();
+        const filteredOnlineResources = remoteResources.filter((resource) =>
+          resourceMatchesFilter(resource, documentTypeFilter)
+        );
+        const filteredStaticDocuments = staticDocuments.filter((document) => {
+          if (documentTypeFilter === "all") return true;
+          const kind = String(document.kind || "").toLowerCase();
+          if (documentTypeFilter === "pdf") return kind.includes("pdf");
+          if (documentTypeFilter === "video") return kind.includes("vidéo") || kind.includes("video");
+          if (documentTypeFilter === "audio") return kind.includes("audio");
+          return true;
+        });
         return `
           <div class="stack">
             <section class="section">
               <div class="eyebrow">Bibliothèque</div>
               <h2>Documents et ressources</h2>
               <p>Tous les supports du Master sont centralisés ici : fichiers ajoutés en ligne, supports de cours, fiches, vidéos, audios et exercices.</p>
+              <div class="toolbar">
+                ${renderFilterButtons(documentTypeFilter, "documents")}
+              </div>
             </section>
 
             <section class="section">
               <h2>Fichiers ajoutés en ligne</h2>
               <div class="list-stack">
                 ${
-                  remoteResources.length
-                    ? remoteResources
+                  filteredOnlineResources.length
+                    ? filteredOnlineResources
                         .map((resource) => {
                           const module = getModuleById(resource.module_id);
                           return `
@@ -2703,10 +2963,16 @@
                                   <a class="resource-link" href="${escapeHtml(getResourceUrl(resource))}" target="_blank" rel="noopener">
                                     ${icon("book")} Ouvrir
                                   </a>
+                                  <button class="ai-action-button" data-preview-resource="${escapeHtml(resource.id)}">Aperçu</button>
                                   ${renderResourceAiButtons(resource)}
                                   ${module ? `<button class="ai-action-button" data-open-module="${escapeHtml(module.id)}">Module</button>` : ""}
                                 </div>
                               </div>
+                              ${
+                                activePreviewResourceId === resource.id
+                                  ? `<div style="margin-top:16px">${renderResourcePreview(resource)}</div>`
+                                  : ""
+                              }
                             </div>
                           `;
                         })
@@ -2719,7 +2985,7 @@
             <section class="section">
               <h2>Supports prévus par module</h2>
               <div class="list-stack">
-                ${staticDocuments
+                ${filteredStaticDocuments
                   .map(
                     (document) => `
                       <div class="list-item bordered">
@@ -2867,6 +3133,250 @@
         `;
       }
 
+      function renderModuleTabs() {
+        const tabs = [
+          ["overview", "Objectifs"],
+          ["cours", "Cours"],
+          ["documents", "Documents"],
+          ["videos", "Vidéos"],
+          ["quiz", "Quiz IA"],
+          ["forum", "Forum"],
+          ["travaux", "Travaux"],
+        ];
+        return `
+          <section class="section">
+            <div class="toolbar">
+              ${tabs
+                .map(
+                  ([value, label]) =>
+                    `<button class="tab-button ${activeModuleTab === value ? "active" : ""}" data-module-tab="${value}">${label}</button>`
+                )
+                .join("")}
+            </div>
+          </section>
+        `;
+      }
+
+      function renderModuleOverviewTab(module) {
+        return `
+          <div class="cards-2">
+            <section class="section">
+              <h2>Objectifs pédagogiques</h2>
+              <div class="list-stack">
+                ${module.objectifs
+                  .map((item) => `<div class="list-item">${icon("check")} <span>${escapeHtml(item)}</span></div>`)
+                  .join("")}
+              </div>
+            </section>
+
+            <section class="section">
+              <h2>Plan rapide</h2>
+              <div class="list-stack">
+                ${getModuleLessonTitles(module)
+                  .map((item, index) => `<div class="list-item"><strong>Leçon ${index + 1} :</strong> ${escapeHtml(item)}</div>`)
+                  .join("")}
+              </div>
+            </section>
+          </div>
+        `;
+      }
+
+      function renderModuleLessonsTab(module) {
+        return `
+          <section class="section">
+            <h2>Cours du module</h2>
+            <p>Avancez leçon par leçon et marquez votre progression.</p>
+            <div class="list-stack">
+              ${getModuleLessonTitles(module)
+                .map((item, index) => {
+                  const done = isLessonDone(module.id, index);
+                  return `
+                    <div class="list-item bordered lesson-row ${done ? "done" : ""}">
+                      <div>
+                        <strong>Leçon ${index + 1} :</strong> ${escapeHtml(item)}
+                        <div style="margin-top:5px;color:#64748b;font-size:12px;font-weight:800">${done ? "Terminée" : "À travailler"} - 35 min estimées</div>
+                      </div>
+                      <button class="${done ? "green-button" : "secondary-button"}" data-toggle-lesson="${escapeHtml(module.id)}" data-lesson-index="${index}">
+                        ${done ? "Terminée" : "Marquer terminé"}
+                      </button>
+                    </div>
+                  `;
+                })
+                .join("")}
+            </div>
+          </section>
+        `;
+      }
+
+      function renderOnlineResourceItem(resource, module) {
+        return `
+          <div class="list-item bordered">
+            <div class="forum-row">
+              <div>
+                <strong>${escapeHtml(resource.title)}</strong>
+                <div style="margin-top:6px;color:#64748b">${escapeHtml(getResourceKind(resource))} ajouté en ligne : ${escapeHtml(resource.file_name || "ressource")}</div>
+              </div>
+              <div class="ai-actions">
+                <a class="resource-link" href="${escapeHtml(getResourceUrl(resource))}" target="_blank" rel="noopener">
+                  ${icon("book")} Ouvrir / télécharger
+                </a>
+                <button class="ai-action-button" data-preview-resource="${escapeHtml(resource.id)}">Aperçu</button>
+                ${renderResourceAiButtons(resource)}
+              </div>
+            </div>
+            ${activePreviewResourceId === resource.id ? `<div style="margin-top:16px">${renderResourcePreview(resource)}</div>` : ""}
+          </div>
+        `;
+      }
+
+      function renderModuleDocumentsTab(module, onlineResources) {
+        const documentResources = onlineResources.filter((item) => ["pdf", "document"].includes(getResourceKindSlug(item)));
+        const staticDocuments = module.ressources.filter((item) => {
+          const type = String(item.type || "").toLowerCase();
+          return !type.includes("vidéo") && !type.includes("video");
+        });
+        return `
+          <section class="section">
+            <h2>Documents</h2>
+            <p>Supports PDF, Word, PowerPoint, Excel, fiches et exercices.</p>
+            <div class="list-stack">
+              ${staticDocuments
+                .map(
+                  (item) => `
+                    <div class="list-item bordered">
+                      <strong>${escapeHtml(item.nom)}</strong>
+                      <div style="margin-top:6px;color:#64748b">Type : ${escapeHtml(item.type)}</div>
+                      <span class="chip" style="margin-top:10px;display:inline-flex">${escapeHtml(item.statut)}</span>
+                    </div>
+                  `
+                )
+                .join("")}
+              ${documentResources.map((item) => renderOnlineResourceItem(item, module)).join("")}
+              ${!staticDocuments.length && !documentResources.length ? '<div class="soft-box">Aucun document disponible pour le moment.</div>' : ""}
+            </div>
+          </section>
+        `;
+      }
+
+      function renderModuleVideosTab(module, onlineResources) {
+        const videos = onlineResources.filter((item) => getResourceKindSlug(item) === "video");
+        const staticVideos = module.ressources.filter((item) => String(item.type || "").toLowerCase().includes("vid"));
+        return `
+          <section class="section">
+            <h2>Vidéos</h2>
+            <p>Capsules, enregistrements et supports vidéo liés au module.</p>
+            <div class="list-stack">
+              ${staticVideos
+                .map(
+                  (item) => `
+                    <div class="list-item bordered">
+                      <strong>${escapeHtml(item.nom)}</strong>
+                      <div style="margin-top:6px;color:#64748b">Type : ${escapeHtml(item.type)}</div>
+                      <span class="chip" style="margin-top:10px;display:inline-flex">${escapeHtml(item.statut)}</span>
+                    </div>
+                  `
+                )
+                .join("")}
+              ${videos.map((item) => renderOnlineResourceItem(item, module)).join("")}
+              ${!staticVideos.length && !videos.length ? '<div class="soft-box">Aucune vidéo disponible pour le moment.</div>' : ""}
+            </div>
+          </section>
+        `;
+      }
+
+      function renderModuleQuizTab(module) {
+        return `
+          <section class="section">
+            <h2>Quiz et révision IA</h2>
+            <p>Générez un quiz, un résumé ou un plan de révision pour ce module.</p>
+            <div class="toolbar">
+              <button class="primary-button" data-ai-prompt="Quiz ${escapeHtml(module.titre)}">${icon("sparkles")} Démarrer un quiz</button>
+              <button class="secondary-button" data-ai-prompt="Résumé ${escapeHtml(module.titre)}">Résumé IA</button>
+              <button class="secondary-button" data-ai-prompt="Plan de révision ${escapeHtml(module.titre)}">Plan de révision</button>
+            </div>
+            <div class="notice" style="margin-top:16px">
+              Pour un quiz basé sur un vrai PDF, utilisez les boutons Quiz IA placés à côté du fichier ajouté.
+            </div>
+          </section>
+        `;
+      }
+
+      function renderModuleForumTab(module, onlineForumTopics) {
+        return `
+          <section class="section">
+            <div class="forum-row">
+              <h2>Forum de discussion</h2>
+              <button class="green-button" data-module-action="forum">${icon("message")} Nouveau sujet</button>
+            </div>
+            <div class="list-stack">
+              ${module.forum
+                .map(
+                  (item) => `
+                    <div class="list-item bordered">
+                      <div class="forum-row">
+                        <div>
+                          <strong>${escapeHtml(item.sujet)}</strong>
+                          <div style="margin-top:5px;color:#64748b;font-size:13px">Publié par : ${escapeHtml(item.auteur)}</div>
+                        </div>
+                        <span class="chip">${item.reponses} réponses</span>
+                      </div>
+                    </div>
+                  `
+                )
+                .join("")}
+              ${onlineForumTopics
+                .map(
+                  (item) => `
+                    <div class="list-item bordered">
+                      <div class="forum-row">
+                        <div>
+                          <strong>${escapeHtml(item.subject)}</strong>
+                          <div style="margin-top:5px;color:#64748b;font-size:13px">Publié par : ${escapeHtml(item.author_name || "Étudiant")}</div>
+                          <div style="margin-top:8px;color:#475569">${escapeHtml(item.message || "")}</div>
+                        </div>
+                        <span class="chip">Nouveau</span>
+                      </div>
+                    </div>
+                  `
+                )
+                .join("")}
+            </div>
+          </section>
+        `;
+      }
+
+      function renderModuleWorkTab(module) {
+        return `
+          <div class="cards-2">
+            <section class="section">
+              <h2>Exposés</h2>
+              <div class="list-stack">
+                ${module.exposes.map((item) => `<div class="list-item">${escapeHtml(item)}</div>`).join("")}
+                <button class="primary-button" data-module-action="expose">${icon("upload")} Déposer un exposé</button>
+              </div>
+            </section>
+
+            <section class="section">
+              <h2>Projets</h2>
+              <div class="list-stack">
+                ${module.projets.map((item) => `<div class="list-item">${escapeHtml(item)}</div>`).join("")}
+                <button class="dark-button" data-module-action="project">${icon("briefcase")} Soumettre un projet</button>
+              </div>
+            </section>
+          </div>
+        `;
+      }
+
+      function renderModuleTabContent(module, onlineResources, onlineForumTopics) {
+        if (activeModuleTab === "overview") return renderModuleOverviewTab(module);
+        if (activeModuleTab === "documents") return renderModuleDocumentsTab(module, onlineResources);
+        if (activeModuleTab === "videos") return renderModuleVideosTab(module, onlineResources);
+        if (activeModuleTab === "quiz") return renderModuleQuizTab(module);
+        if (activeModuleTab === "forum") return renderModuleForumTab(module, onlineForumTopics);
+        if (activeModuleTab === "travaux") return renderModuleWorkTab(module);
+        return renderModuleLessonsTab(module);
+      }
+
       function renderModuleDetails(module) {
         const onlineResources = getRemoteResources(module.id);
         const onlineForumTopics = getRemoteForumTopics(module.id);
@@ -2896,132 +3406,8 @@
             </section>
 
             ${renderModuleActionPanel(module)}
-
-            <div class="cards-2">
-              <section class="section">
-                <h2>Objectifs pédagogiques</h2>
-                <div class="list-stack">
-                  ${module.objectifs
-                    .map((item) => `<div class="list-item">${icon("check")} <span>${escapeHtml(item)}</span></div>`)
-                    .join("")}
-                </div>
-              </section>
-
-              <section class="section">
-                <h2>Plan du cours</h2>
-                <div class="list-stack">
-                  ${getModuleLessonTitles(module)
-                    .map(
-                      (item, index) => {
-                        const done = isLessonDone(module.id, index);
-                        return `
-                          <div class="list-item bordered lesson-row ${done ? "done" : ""}">
-                            <div>
-                              <strong>Leçon ${index + 1} :</strong> ${escapeHtml(item)}
-                              <div style="margin-top:5px;color:#64748b;font-size:12px;font-weight:800">${done ? "Terminée" : "À travailler"} - 35 min estimées</div>
-                            </div>
-                            <button class="${done ? "green-button" : "secondary-button"}" data-toggle-lesson="${escapeHtml(module.id)}" data-lesson-index="${index}">
-                              ${done ? "Terminée" : "Marquer terminé"}
-                            </button>
-                          </div>
-                        `;
-                      }
-                    )
-                    .join("")}
-                </div>
-              </section>
-            </div>
-
-            <div class="cards-3">
-              <section class="section">
-                <h2>Cours et ressources</h2>
-                <div class="list-stack">
-                  ${module.ressources
-                    .map(
-                      (item) => `
-                        <div class="list-item bordered">
-                          <strong>${escapeHtml(item.nom)}</strong>
-                          <div style="margin-top:6px;color:#64748b">Type : ${escapeHtml(item.type)}</div>
-                          <span class="chip" style="margin-top:10px;display:inline-flex">${escapeHtml(item.statut)}</span>
-                        </div>
-                      `
-                    )
-                    .join("")}
-                  ${onlineResources
-                    .map(
-                      (item) => `
-                        <div class="list-item bordered">
-                          <strong>${escapeHtml(item.title)}</strong>
-                          <div style="margin-top:6px;color:#64748b">${escapeHtml(getResourceKind(item))} ajouté en ligne : ${escapeHtml(item.file_name || "ressource")}</div>
-                          <div class="ai-actions">
-                            <a class="resource-link" href="${escapeHtml(getResourceUrl(item))}" target="_blank" rel="noopener">
-                              ${icon("book")} Ouvrir / télécharger
-                            </a>
-                            ${renderResourceAiButtons(item)}
-                          </div>
-                        </div>
-                      `
-                    )
-                    .join("")}
-                </div>
-              </section>
-
-              <section class="section">
-                <h2>Interface Exposés</h2>
-                <div class="list-stack">
-                  ${module.exposes.map((item) => `<div class="list-item">${escapeHtml(item)}</div>`).join("")}
-                  <button class="primary-button" data-module-action="expose">${icon("upload")} Déposer un exposé</button>
-                </div>
-              </section>
-
-              <section class="section">
-                <h2>Interface Projets</h2>
-                <div class="list-stack">
-                  ${module.projets.map((item) => `<div class="list-item">${escapeHtml(item)}</div>`).join("")}
-                  <button class="dark-button" data-module-action="project">${icon("briefcase")} Soumettre un projet</button>
-                </div>
-              </section>
-            </div>
-
-            <section class="section">
-              <div class="forum-row">
-                <h2>Forum de discussion du module</h2>
-                <button class="green-button" data-module-action="forum">${icon("message")} Nouveau sujet</button>
-              </div>
-              <div class="list-stack">
-                ${module.forum
-                  .map(
-                    (item) => `
-                      <div class="list-item bordered">
-                        <div class="forum-row">
-                          <div>
-                            <strong>${escapeHtml(item.sujet)}</strong>
-                            <div style="margin-top:5px;color:#64748b;font-size:13px">Publié par : ${escapeHtml(item.auteur)}</div>
-                          </div>
-                          <span class="chip">${item.reponses} réponses</span>
-                        </div>
-                      </div>
-                    `
-                  )
-                  .join("")}
-                ${onlineForumTopics
-                  .map(
-                    (item) => `
-                      <div class="list-item bordered">
-                        <div class="forum-row">
-                          <div>
-                            <strong>${escapeHtml(item.subject)}</strong>
-                            <div style="margin-top:5px;color:#64748b;font-size:13px">Publié par : ${escapeHtml(item.author_name || "Étudiant")}</div>
-                            <div style="margin-top:8px;color:#475569">${escapeHtml(item.message || "")}</div>
-                          </div>
-                          <span class="chip">Nouveau</span>
-                        </div>
-                      </div>
-                    `
-                  )
-                  .join("")}
-              </div>
-            </section>
+            ${renderModuleTabs()}
+            ${renderModuleTabContent(module, onlineResources, onlineForumTopics)}
           </div>
         `;
       }
@@ -3110,6 +3496,7 @@
                       Formats acceptés : PDF, Word, PowerPoint, Excel, MP3, MP4, MOV, WebM.
                     </div>
                   </div>
+                  <div class="upload-progress" id="uploadProgress"><span></span></div>
                   <button class="primary-button" type="submit">${icon("upload")} Ajouter la ressource au module</button>
                 </form>
                 <form class="form-grid" id="createModuleForm" style="margin-top:24px">
@@ -3193,6 +3580,23 @@
                   <h2>Espace Administration</h2>
                   <p>Interface de pilotage des contenus pédagogiques, mises à jour et publication des ressources.</p>
                 </div>
+              </div>
+              <div class="metric-grid">
+                ${[
+                  { value: remoteResources.length, label: "Cours publiés" },
+                  { value: remoteSubmissions.length, label: "Dépôts étudiants" },
+                  { value: remoteCourseRequests.length, label: "Demandes de cours" },
+                  { value: remoteAnnouncements.length, label: "Annonces" },
+                ]
+                  .map(
+                    (item) => `
+                      <div class="metric-card">
+                        <strong>${escapeHtml(item.value)}</strong>
+                        <span>${escapeHtml(item.label)}</span>
+                      </div>
+                    `
+                  )
+                  .join("")}
               </div>
             </section>
 
@@ -3336,6 +3740,28 @@
           });
         });
 
+        app.querySelectorAll("[data-module-tab]").forEach((button) => {
+          button.addEventListener("click", () => {
+            activeModuleTab = button.dataset.moduleTab;
+            activeModuleAction = null;
+            moduleMessage = null;
+            activePreviewResourceId = null;
+            render();
+          });
+        });
+
+        app.querySelectorAll("[data-filter-target]").forEach((button) => {
+          button.addEventListener("click", () => {
+            if (button.dataset.filterTarget === "courses") {
+              courseTypeFilter = button.dataset.filterValue;
+            } else {
+              documentTypeFilter = button.dataset.filterValue;
+            }
+            activePreviewResourceId = null;
+            render();
+          });
+        });
+
         const back = app.querySelector("[data-back-modules]");
         if (back) {
           back.addEventListener("click", () => {
@@ -3436,6 +3862,14 @@
             render();
             const chat = document.querySelector("#aiChat");
             if (chat) chat.scrollTop = chat.scrollHeight;
+          });
+        });
+
+        app.querySelectorAll("[data-preview-resource]").forEach((button) => {
+          button.addEventListener("click", () => {
+            activePreviewResourceId =
+              activePreviewResourceId === button.dataset.previewResource ? null : button.dataset.previewResource;
+            render();
           });
         });
 
